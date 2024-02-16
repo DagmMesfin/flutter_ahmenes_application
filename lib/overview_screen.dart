@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 List<List<String>> sliderData = [
   [
@@ -70,53 +71,90 @@ Widget descriptionBlock(int i) {
   );
 }
 
-class OverviewScreen extends StatelessWidget {
+Widget buildIndicator(context) {
+  return Container(
+    margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
+    child: AnimatedSmoothIndicator(
+      activeIndex: activeIndex,
+      count: sliderData.length,
+      curve: Curves.easeInOut,
+      effect: ScrollingDotsEffect(
+          maxVisibleDots: 5,
+          offset: 16,
+          fixedCenter: true,
+          spacing: MediaQuery.of(context).size.width * 0.25,
+          strokeWidth: 3,
+          dotColor: Colors.white,
+          activeDotScale: 2,
+          dotHeight: 12,
+          dotWidth: 12,
+          activeDotColor: Colors.white,
+          paintStyle: PaintingStyle.stroke),
+    ),
+  );
+}
+
+int activeIndex = 0;
+
+class OverviewScreen extends StatefulWidget {
   const OverviewScreen({super.key});
 
   @override
+  State<OverviewScreen> createState() => OverviewScreenState();
+}
+
+class OverviewScreenState extends State<OverviewScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CarouselSlider.builder(
-        options: CarouselOptions(
+        body: Stack(
+      alignment: AlignmentDirectional.bottomCenter,
+      children: [
+        CarouselSlider.builder(
+          options: CarouselOptions(
             height: MediaQuery.of(context).size.height,
-            aspectRatio: MediaQuery.of(context).size.width /
-                MediaQuery.of(context).size.height,
-            clipBehavior: Clip.hardEdge,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.scale),
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) =>
-            Stack(fit: StackFit.expand, children: [
-          Image(
-            image: AssetImage(sliderData[itemIndex][0]),
-            fit: BoxFit.cover,
+            viewportFraction: 1,
+            enableInfiniteScroll: false,
+            onPageChanged: (index, reason) {
+              setState(() => activeIndex = index);
+            },
           ),
-          Positioned(
-            top: 80,
-            left: 30,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [learnMore(itemIndex)],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [titleBlock(itemIndex)],
-                ),
-                SizedBox(
-                  height: 350,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [descriptionBlock(itemIndex)],
-                )
-              ],
+          itemCount: 5,
+          itemBuilder:
+              (BuildContext context, int itemIndex, int pageViewIndex) =>
+                  Stack(fit: StackFit.expand, children: [
+            Image(
+              image: AssetImage(sliderData[itemIndex][0]),
+              fit: BoxFit.cover,
             ),
-          ),
-        ]),
-      ),
-    );
+            Positioned(
+              top: 80,
+              left: 30,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [learnMore(itemIndex)],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [titleBlock(itemIndex)],
+                  ),
+                  SizedBox(
+                    height: 350,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [descriptionBlock(itemIndex)],
+                  )
+                ],
+              ),
+            ),
+          ]),
+        ),
+        buildIndicator(context),
+      ],
+    ));
   }
 }
