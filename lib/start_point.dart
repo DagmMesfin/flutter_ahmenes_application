@@ -1,125 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/overview_screen.dart';
+import 'package:flutter_ahmenes_application/pages/HomescreenContent_page.dart';
+import 'package:flutter_ahmenes_application/pages/profile/ProfilePage.dart';
+import 'package:flutter_ahmenes_application/pages/VrShow_Page.dart';
 
-class satellietsstartingscreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    double circleSize = 70.0;
-
-    return Scaffold(
-      body: Stack(fit: StackFit.expand, children: [
-        // Background Image (Replace with your desired background image)
-
-        const Image(
-          image: AssetImage('assets/images/image 6.jpg'),
-          fit: BoxFit.cover,
-        ),
-
-        const Positioned(
-          top: 80,
-          left: 30,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Learn about',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white,
-                      height: 1,
-                      letterSpacing: 3.0,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Satellites',
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      height: 1,
-                      letterSpacing: 3.0,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 265,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'venture into the realm of\nman-made wonders that orbits\nour planet.in this section,\nyou will uncover the ingenuity\nbehind satellites, from\ncommunication satellites\nlinking the world to earth.',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      letterSpacing: 2.0,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-
-        Positioned(
-          bottom: 50,
-          left: 20,
-          right: 20,
-          child: Container(
-            width: 10,
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: TextButton(
-              onPressed: () {
-                // Navigate to the OverviewScreen when the button is pressed
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginOptionScreen()),
-                );
-              },
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.all(16),
-                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Get Started',
-                    style: TextStyle(
-                      fontSize: 20,
-                      letterSpacing: 2.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Icon(Icons.arrow_forward, color: Colors.black),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ]),
-    );
-  }
-}
+import 'home_screen.dart';
 
 class LoginOptionScreen extends StatelessWidget {
   @override
@@ -160,7 +45,7 @@ class LoginOptionScreen extends StatelessWidget {
                     Text(
                       'Universe',
                       style: TextStyle(
-                        fontSize: 50,
+                        fontSize: 63,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         height: 1,
@@ -178,7 +63,7 @@ class LoginOptionScreen extends StatelessWidget {
                     Text(
                       'Welcome',
                       style: TextStyle(
-                        fontSize: 50,
+                        fontSize: 40,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         height: 1,
@@ -262,6 +147,8 @@ class LoginOptionScreen extends StatelessWidget {
                     child: Text(
                       'Create New Account',
                       style: TextStyle(
+                        decorationColor: Colors.white,
+                        decoration: TextDecoration.underline,
                         fontSize: 18,
                         color: Colors.white,
                       ),
@@ -310,9 +197,9 @@ class NewUserLogin extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
-            top: 100,
-            left: 30,
+          Positioned(
+            top: 110,
+            left: 55,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -320,7 +207,7 @@ class NewUserLogin extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Let\'s ',
+                      'Let\'s',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.normal,
@@ -337,7 +224,7 @@ class NewUserLogin extends StatelessWidget {
                     Text(
                       'Start',
                       style: TextStyle(
-                        fontSize: 50,
+                        fontSize: 63,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         height: 1,
@@ -352,7 +239,7 @@ class NewUserLogin extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(55),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -440,7 +327,7 @@ class NewUserLogin extends StatelessWidget {
                       // Navigate to the OverviewScreen when the button is pressed
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => homescreen()),
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
                     },
                     style: TextButton.styleFrom(
@@ -480,9 +367,10 @@ class NewUserLogin extends StatelessWidget {
                     child: Text(
                       'Terms and Conditions',
                       style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
+                          decoration: TextDecoration.underline,
+                          fontSize: 18,
+                          color: Colors.white,
+                          decorationColor: Colors.white),
                     ),
                   ),
                 ),
@@ -530,8 +418,8 @@ class userlogin extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Positioned(
-            top: 100,
-            left: 30,
+            top: 110,
+            left: 55,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -556,7 +444,7 @@ class userlogin extends StatelessWidget {
                     Text(
                       'Back',
                       style: TextStyle(
-                        fontSize: 50,
+                        fontSize: 63,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         height: 1,
@@ -571,7 +459,7 @@ class userlogin extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(55),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -636,7 +524,7 @@ class userlogin extends StatelessWidget {
                       // Navigate to the OverviewScreen when the button is pressed
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => homescreen()),
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
                       );
                     },
                     style: TextButton.styleFrom(
@@ -665,380 +553,13 @@ class userlogin extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 GestureDetector(
-                  onTap: () {
-                    // Handle the gesture when "Create New Account" is tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => forgotpassword()),
-                    );
-                  },
+                  onTap: () {},
                   child: Center(
                     child: Text(
                       'forget password?',
                       style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class forgotpassword extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Background Image (Replace with your desired background image)
-          const Image(
-            image: AssetImage('assets/images/image 8.jpg'),
-            fit: BoxFit.cover,
-          ),
-          const Positioned(
-            top: 80,
-            left: 30,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.white,
-                        height: 1,
-                        letterSpacing: 3.0,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Back',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        height: 1,
-                        letterSpacing: 3.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 250),
-              ],
-            ),
-          ),
-
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Name field
-
-                // Email field
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/email.png',
-                      height: 10, // Adjust height as needed
-                      width: 10, // Adjust width as needed
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                //password
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/lockIcon.png',
-                      height: 5, // Adjust height as needed
-                      width: 5, // Adjust width as needed
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 50,
-            left: 20,
-            right: 20,
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigate to the OverviewScreen when the button is pressed
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OverviewScreen()),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.all(16),
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'log in',
-                          style: TextStyle(
-                            fontSize: 20,
-                            letterSpacing: 2.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(Icons.arrow_forward, color: Colors.black),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    // Handle the gesture when "Create New Account" is tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NewUserLogin()),
-                    );
-                  },
-                  child: Center(
-                    child: Text(
-                      'forget password?',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class homescreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Background Image (Replace with your desired background image)
-          const Image(
-            image: AssetImage('assets/images/image 9.jpg'),
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            top: 50,
-            left: 30,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome onboard,',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.white,
-                        height: 1,
-                        letterSpacing: 3.0,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Space Voyager!',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        height: 1,
-                        letterSpacing: 3.0,
-                      ),
-                    ),
-                    SizedBox(
-                        width: 16), // Add space between text and profile image
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/image 10.jpg'), // Replace with your image asset
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 250),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Name field
-
-                // Email field
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/email.png',
-                      height: 10, // Adjust height as needed
-                      width: 10, // Adjust width as needed
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-
-                // password
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/lockIcon.png',
-                      height: 20, // Adjust height as needed
-                      width: 20, // Adjust width as needed
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 50,
-            left: 20,
-            right: 20,
-            child: Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigate to the OverviewScreen when the button is pressed
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OverviewScreen()),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.all(16),
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'log in',
-                          style: TextStyle(
-                            fontSize: 20,
-                            letterSpacing: 2.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(Icons.arrow_forward, color: Colors.black),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    // Handle the gesture when "Create New Account" is tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NewUserLogin()),
-                    );
-                  },
-                  child: Center(
-                    child: Text(
-                      'forget password?',
-                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: Colors.white,
                         fontSize: 18,
                         color: Colors.white,
                       ),

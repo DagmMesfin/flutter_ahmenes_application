@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_ahmenes_application/widgets.dart';
 
 List<List<String>> sliderData = [
   [
@@ -30,70 +30,6 @@ List<List<String>> sliderData = [
   ],
 ];
 
-Widget learnMore(int i) {
-  if (i > 0) {
-    return Text(
-      'Learn about',
-      style: TextStyle(
-        fontSize: 40,
-        fontWeight: FontWeight.normal,
-        color: Colors.white,
-        height: 1,
-        letterSpacing: 3.0,
-      ),
-    );
-  }
-  return Text('');
-}
-
-Widget titleBlock(int i) {
-  return Text(
-    sliderData[i][1],
-    style: TextStyle(
-      fontSize: 60,
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-      height: 1,
-      letterSpacing: 3.0,
-    ),
-  );
-}
-
-Widget descriptionBlock(int i) {
-  return Text(
-    sliderData[i][2],
-    style: TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-      letterSpacing: 2.0,
-    ),
-  );
-}
-
-Widget buildIndicator(context) {
-  return Container(
-    margin: EdgeInsets.fromLTRB(0, 30, 0, 30),
-    child: AnimatedSmoothIndicator(
-      activeIndex: activeIndex,
-      count: sliderData.length,
-      curve: Curves.easeInOut,
-      effect: ScrollingDotsEffect(
-          maxVisibleDots: 5,
-          offset: 16,
-          fixedCenter: true,
-          spacing: MediaQuery.of(context).size.width * 0.25,
-          strokeWidth: 3,
-          dotColor: Colors.white,
-          activeDotScale: 2,
-          dotHeight: 12,
-          dotWidth: 12,
-          activeDotColor: Colors.white,
-          paintStyle: PaintingStyle.stroke),
-    ),
-  );
-}
-
 int activeIndex = 0;
 
 class OverviewScreen extends StatefulWidget {
@@ -104,57 +40,73 @@ class OverviewScreen extends StatefulWidget {
 }
 
 class OverviewScreenState extends State<OverviewScreen> {
+  final controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      alignment: AlignmentDirectional.bottomCenter,
-      children: [
-        CarouselSlider.builder(
-          options: CarouselOptions(
-            height: MediaQuery.of(context).size.height,
-            viewportFraction: 1,
-            enableInfiniteScroll: false,
-            onPageChanged: (index, reason) {
-              setState(() => activeIndex = index);
-            },
+      body: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          CarouselSlider.builder(
+            carouselController: controller,
+            options: CarouselOptions(
+              initialPage: 0,
+              height: MediaQuery.of(context).size.height,
+              viewportFraction: 1,
+              enableInfiniteScroll: false,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  activeIndex = index;
+                });
+              },
+            ),
+            itemCount: 5,
+            itemBuilder:
+                (BuildContext context, int itemIndex, int pageViewIndex) =>
+                    Stack(
+                        fit: StackFit.expand,
+                        alignment: AlignmentDirectional.bottomCenter,
+                        children: [
+                  Image(
+                    image: AssetImage(sliderData[itemIndex][0]),
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    top: 80,
+                    left: 30,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [titleBlock(itemIndex)],
+                        ),
+                      ],
+                    ),
+                  ),
+                  skipButton(itemIndex, context),
+                  Positioned(
+                    bottom: 150,
+                    left: 20,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        descriptionBlock(itemIndex),
+                      ],
+                    ),
+                  ),
+                ]),
           ),
-          itemCount: 5,
-          itemBuilder:
-              (BuildContext context, int itemIndex, int pageViewIndex) =>
-                  Stack(fit: StackFit.expand, children: [
-            Image(
-              image: AssetImage(sliderData[itemIndex][0]),
-              fit: BoxFit.cover,
-            ),
-            Positioned(
-              top: 80,
-              left: 30,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [learnMore(itemIndex)],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [titleBlock(itemIndex)],
-                  ),
-                  SizedBox(
-                    height: 350,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [descriptionBlock(itemIndex)],
-                  )
-                ],
-              ),
-            ),
-          ]),
-        ),
-        buildIndicator(context),
-      ],
-    ));
+          Positioned(
+            bottom: 30,
+            child: buildIndicator(activeIndex, context),
+          ),
+          learnMore(activeIndex, context),
+          Positioned(
+              bottom: 20,
+              child: changeButton(activeIndex, context, controller)),
+        ],
+      ),
+    );
   }
 }
