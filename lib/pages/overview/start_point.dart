@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ahmenes_application/overview_screen.dart';
-import 'package:flutter_ahmenes_application/pages/HomescreenContent_page.dart';
-import 'package:flutter_ahmenes_application/pages/profile/ProfilePage.dart';
-import 'package:flutter_ahmenes_application/pages/VrShow_Page.dart';
-
-import 'home_screen.dart';
+import 'package:flutter_ahmenes_application/home_screen.dart';
 
 class LoginOptionScreen extends StatelessWidget {
+  const LoginOptionScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +94,7 @@ class LoginOptionScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -111,13 +108,13 @@ class LoginOptionScreen extends StatelessWidget {
                       );
                     },
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -134,7 +131,7 @@ class LoginOptionScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
                     // Handle the gesture when "Create New Account" is tapped
@@ -143,7 +140,7 @@ class LoginOptionScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => NewUserLogin()),
                     );
                   },
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'Create New Account',
                       style: TextStyle(
@@ -165,6 +162,8 @@ class LoginOptionScreen extends StatelessWidget {
 }
 
 class NewUserLogin extends StatelessWidget {
+  const NewUserLogin({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,19 +184,19 @@ class NewUserLogin extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 93, 92, 92),
+                  color: const Color.fromARGB(255, 93, 92, 92),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                 ),
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 110,
             left: 55,
             child: Column(
@@ -239,69 +238,63 @@ class NewUserLogin extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.all(55),
+            padding: const EdgeInsets.all(55),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Name field
                 TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Your Name',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/person.png',
-                      height: 5, // Adjust height as needed
-                      width: 5, // Adjust width as needed
-                    ),
-                  ),
+                  decoration: const InputDecoration(
+                      labelText: 'Your Name',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      suffixIcon: Icon(
+                        Icons.person,
+                        size: 5,
+                      )),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // Email field
                 TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/email.png',
-                      height: 10, // Adjust height as needed
-                      width: 10, // Adjust width as needed
-                    ),
-                  ),
+                  decoration: const InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      suffixIcon: Icon(
+                        Icons.email_outlined,
+                        size: 5,
+                      )),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 //password
                 TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/lockIcon.png',
-                      height: 5, // Adjust height as needed
-                      width: 5, // Adjust width as needed
-                    ),
-                  ),
+                  decoration: const InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      suffixIcon: Icon(
+                        Icons.password,
+                        size: 5,
+                      )),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 // ... (Sign up button code)
 
@@ -317,7 +310,7 @@ class NewUserLogin extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -327,17 +320,18 @@ class NewUserLogin extends StatelessWidget {
                       // Navigate to the OverviewScreen when the button is pressed
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
                       );
                     },
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -354,7 +348,7 @@ class NewUserLogin extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
                     // Handle the gesture when "Create New Account" is tapped
@@ -363,7 +357,7 @@ class NewUserLogin extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => NewUserLogin()),
                     );
                   },
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'Terms and Conditions',
                       style: TextStyle(
@@ -384,6 +378,8 @@ class NewUserLogin extends StatelessWidget {
 }
 
 class userlogin extends StatelessWidget {
+  const userlogin({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -404,20 +400,20 @@ class userlogin extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 93, 92, 92),
+                  color: const Color.fromARGB(255, 93, 92, 92),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                 ),
               ),
             ),
           ),
-          SizedBox(height: 10),
-          Positioned(
+          const SizedBox(height: 10),
+          const Positioned(
             top: 110,
             left: 55,
             child: Column(
@@ -459,7 +455,7 @@ class userlogin extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.all(55),
+            padding: const EdgeInsets.all(55),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -467,43 +463,41 @@ class userlogin extends StatelessWidget {
 
                 // Email field
                 TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/email.png',
-                      height: 10, // Adjust height as needed
-                      width: 10, // Adjust width as needed
-                    ),
-                  ),
+                  decoration: const InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      suffixIcon: Icon(
+                        Icons.email_outlined,
+                        size: 5,
+                      )),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                 //password
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
-                    ),
-                    suffixIcon: Image.asset(
-                      'assets/icons/lockIcon.png',
-                      height: 5, // Adjust height as needed
-                      width: 5, // Adjust width as needed
-                    ),
-                  ),
+                      labelText: 'Password',
+                      labelStyle: const TextStyle(color: Colors.white),
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.password,
+                            size: 5,
+                          ))),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -514,7 +508,7 @@ class userlogin extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -524,17 +518,18 @@ class userlogin extends StatelessWidget {
                       // Navigate to the OverviewScreen when the button is pressed
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
                       );
                     },
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -551,10 +546,10 @@ class userlogin extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {},
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'forget password?',
                       style: TextStyle(

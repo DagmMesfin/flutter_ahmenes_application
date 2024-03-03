@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ahmenes_application/overview_screen.dart';
+import 'package:flutter_ahmenes_application/pages/overview/overview_screen.dart';
 
 class LaunchScreen extends StatelessWidget {
   const LaunchScreen({super.key});

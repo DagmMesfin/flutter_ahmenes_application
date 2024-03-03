@@ -23,11 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: pages[currentPage],
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: const Color.fromARGB(255, 82, 82, 82),
+          backgroundColor: Color.fromARGB(255, 12, 12, 12),
           selectedItemColor: Colors.white,
           unselectedItemColor: const Color.fromARGB(255, 137, 135, 135),
-          iconSize: 20,
+          iconSize: 35,
           showSelectedLabels: false,
+          showUnselectedLabels: false,
           currentIndex: currentPage,
           onTap: (value) {
             setState(() {
@@ -37,16 +38,16 @@ class _HomeScreenState extends State<HomeScreen> {
           items: const [
             BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('assets/icons/Home.png')),
-              label: 'Home',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon:
                   ImageIcon(AssetImage('assets/icons/Microsoft HoloLens.png')),
-              label: 'VR show',
+              label: '',
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('assets/icons/Playlist.png')),
-              label: 'Playlist',
+              label: '',
             ),
           ]),
     );

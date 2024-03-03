@@ -1,21 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ahmenes_application/fucntions/current_date.dart';
+import 'package:flutter_ahmenes_application/fucntions/date_randomizer.dart';
+import 'package:flutter_ahmenes_application/models/api_fetch.dart';
+import 'package:flutter_ahmenes_application/widgets/fullscreen_show.dart';
+import 'package:flutter_ahmenes_application/widgets/loading_animation.dart';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
-class HomeScreenContentPage extends StatelessWidget {
+class HomeScreenContentPage extends StatefulWidget {
   const HomeScreenContentPage({super.key});
 
+  @override
+  State<HomeScreenContentPage> createState() => _HomeScreenContentPageState();
+}
 
+class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
+  late Future<Apod> futureApod;
+  DateTime selectedDate = DateTime.now();
+  String? _result;
+
+  Future<String?> _getFileType(String url) async {
+    final response = await http.head(Uri.parse(url));
+
+    return response.headers['content-type'];
+  }
+
+  Future<String> fileTypo(String url) async {
+    final mimeType = await _getFileType(url);
+
+    setState(() {
+      _result = mimeType;
+    });
+
+    return '';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    updateData();
+    futureApod = fetchApod(currentDate());
+  }
+
+  void _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        updateData();
+        futureApod = fetchApod(DateFormat('yyyy-MM-dd').format(selectedDate));
+      });
+    }
+  }
+
+  bool isLoading = false;
+
+  void loadData() {
+    // Simulating data loading process
+    Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
+
+  void updateData() {
+    setState(() {
+      isLoading = true;
+      loadData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: 
-      
-      Stack(
+        body: Center(
+      child: Stack(
         fit: StackFit.expand,
         children: [
-          // Background Image
           Image(
-            image: AssetImage('assets/images/image 9.jpg'),
+            image: AssetImage('assets/images/image 13.jpg'),
             fit: BoxFit.cover,
           ),
           Padding(
@@ -33,17 +104,7 @@ class HomeScreenContentPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Welcome onboard,',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white,
-                              height: 1,
-                              letterSpacing: 3.0,
-                            ),
-                          ),
-                          Text(
-                            'Space Voyager!',
+                            'Astronomy',
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
@@ -52,320 +113,234 @@ class HomeScreenContentPage extends StatelessWidget {
                               letterSpacing: 3.0,
                             ),
                           ),
-                        ],
-                      ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/image 10.jpg'),
-                            fit: BoxFit.cover,
+                          SizedBox(
+                            height: 5,
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color.fromARGB(255, 91, 89, 89),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 14),
-                          child: TextField(
-                            onChanged: (value) {},
-                            decoration: InputDecoration(
-                              hintText: 'Search your favorite place...',
-                              border: InputBorder.none,
-                              hintStyle: TextStyle(
-                                  color: const Color.fromARGB(255, 255, 255, 255)),
-                              suffixIcon: Icon(Icons.search,
-                                  color: const Color.fromARGB(255, 255, 255, 255)),
+                          Text(
+                            'Picture of a Day',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white,
+                              height: 1,
+                              letterSpacing: 3.0,
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Categories,',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              height: 1,
-                              letterSpacing: 3.0,
-                            ),
-                          ),
-                          Text(
-                            'Let\'s explore the space',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.white,
-                              height: 1,
-                              letterSpacing: 3.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Image.asset(
-                        'assets/icons/Notification.png',
-                      ),
-                    ],
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Row(
                             children: [
                               Container(
-                                width: 400,
-                                height: 200,
-                                margin: EdgeInsets.all(10),
+                                width: 40,
+                                height: 40,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Stack(
-                                  fit: StackFit.expand,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Image.asset(
-                                        'assets/images/image 11.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 40,
-                                      left: 10,
-                                      child: Text(
-                                        'Adventurer',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      left: 10,
-                                      child: Text(
-                                        'Asteroids',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      right: 10,
-                                      child: ElevatedButton.icon(
-                                        onPressed: () {
-                                          // Button action
-                                        },
-                                        icon: Icon(Icons.arrow_forward,
-                                            color: Colors.white),
-                                        label: Text(''),
-                                        style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: 20,
-                                            horizontal: 20,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          primary: Color.fromARGB(
-                                              115, 106, 107, 107),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 400,
-                                height: 200,
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Stack(
-                                  fit: StackFit.expand,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Image.asset(
-                                        'assets/images/image 12.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 40,
-                                      left: 10,
-                                      child: Text(
-                                        'insightful',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      left: 10,
-                                      child: Text(
-                                        'Astronomy',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      right: 10,
-                                      child: ElevatedButton.icon(
-                                        onPressed: () {
-                                          // Button action
-                                        },
-                                        icon: Icon(Icons.arrow_forward,
-                                            color: Colors.white),
-                                        label: Text(''),
-                                        style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: 20,
-                                            horizontal: 20,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          primary: Color.fromARGB(
-                                              115, 106, 107, 107),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 400,
-                                height: 200,
-                                margin: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Stack(
-                                  fit: StackFit.expand,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Image.asset(
-                                        'assets/images/image 12.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 40,
-                                      left: 10,
-                                      child: Text(
-                                        'insightful',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      left: 10,
-                                      child: Text(
-                                        'Astronomy',
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 10,
-                                      right: 10,
-                                      child: ElevatedButton.icon(
-                                        onPressed: () {
-                                          // Button action
-                                        },
-                                        icon: Icon(Icons.arrow_forward,
-                                            color: Colors.white),
-                                        label: Text(''),
-                                        style: ElevatedButton.styleFrom(
-                                          padding: EdgeInsets.symmetric(
-                                            vertical: 20,
-                                            horizontal: 20,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                          primary: Color.fromARGB(
-                                              115, 106, 107, 107),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/image 10.jpg'),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // Content for the fourth row
-                      // Add your widgets here
+                          )
+                        ],
+                      )
                     ],
                   ),
+                  SizedBox(height: 30),
+                  Container(
+                      height: 40,
+                      width: size.width * 0.8,
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(181, 58, 57, 57),
+                          borderRadius: BorderRadius.circular(6)),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(
+                              icon: ImageIcon(
+                                AssetImage('assets/icons/calendar_clock.png'),
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                size: 30,
+                              ),
+                              onPressed: () => _selectDate(context),
+                            ),
+                            IconButton(
+                              icon: ImageIcon(
+                                AssetImage('assets/icons/calendar.png'),
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                size: 30,
+                              ),
+                              onPressed: () => setState(() {
+                                updateData();
+                                futureApod = fetchApod(getRandomDate());
+                              }),
+                            ),
+                            IconButton(
+                              icon: ImageIcon(
+                                AssetImage('assets/icons/early_on.png'),
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                size: 30,
+                              ),
+                              onPressed: () => setState(() {
+                                updateData();
+                                futureApod = fetchApod(currentDate());
+                              }),
+                            ),
+                          ],
+                        ),
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  isLoading
+                      ? loadAnim(context)
+                      : FutureBuilder<Apod>(
+                          future: futureApod,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              fileTypo(snapshot.data!.url!);
+                              print(_result);
+                              print(_result ==
+                                  "text/html; charset=utf-8" as String?);
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
+                                                    return _result ==
+                                                            "text/html; charset=utf-8"
+                                                        ? ImageFullScreenWrapperWidget(
+                                                            child: Image(
+                                                            image: NetworkImage(
+                                                                snapshot.data!
+                                                                    .thumbnailUrl!),
+                                                          ))
+                                                        : ImageFullScreenWrapperWidget(
+                                                            child: Image(
+                                                            image: NetworkImage(
+                                                                snapshot.data!
+                                                                    .url!),
+                                                          ));
+                                                  }));
+                                                },
+                                                child: Container(
+                                                  width: size.width * 0.8,
+                                                  height: size.height * 0.4,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      image: DecorationImage(
+                                                          image: _result ==
+                                                                  "text/html; charset=utf-8"
+                                                              ? NetworkImage(
+                                                                  snapshot.data!
+                                                                      .thumbnailUrl!)
+                                                              : NetworkImage(
+                                                                  snapshot.data!
+                                                                      .url!),
+                                                          fit: BoxFit.cover)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      width: size.width * 0.8,
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            snapshot.data!.title!,
+                                            softWrap: true,
+                                            style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              height: 1,
+                                              letterSpacing: 3.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      width: size.width * 0.8,
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            snapshot.data!.date!,
+                                            softWrap: true,
+                                            style: TextStyle(
+                                              fontSize: 21,
+                                              color: Colors.white,
+                                              height: 1,
+                                              letterSpacing: 3.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      width: size.width * 0.8,
+                                      child: Wrap(
+                                        children: [
+                                          Text(
+                                            snapshot.data!.explanation!,
+                                            textAlign: TextAlign.justify,
+                                            softWrap: true,
+                                            style: TextStyle(
+                                              fontSize: 17,
+                                              color: Colors.white,
+                                              height: 1,
+                                              letterSpacing: 1.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            } else if (snapshot.hasError) {
+                              return Text('${snapshot.error}');
+                            }
+                            // By default, show a loading spinner.
+                            return Text('');
+                          },
+                        ),
                 ],
               ),
             ),
           ),
         ],
       ),
-     
-    );
+    ));
   }
 }
-  
-
-

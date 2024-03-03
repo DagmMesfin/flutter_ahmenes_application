@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ahmenes_application/overview_screen.dart';
-import 'package:flutter_ahmenes_application/start_point.dart';
+import 'package:flutter_ahmenes_application/pages/overview/overview_screen.dart';
+import 'package:flutter_ahmenes_application/pages/overview/start_point.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 Widget skipButton(int i, context) {
@@ -150,4 +150,77 @@ Widget buildIndicator(int i, context) {
               paintStyle: PaintingStyle.stroke),
         ),
       ));
+}
+
+Widget titleBar() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Welcome onboard,',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.normal,
+              color: Colors.white,
+              height: 1,
+              letterSpacing: 3.0,
+            ),
+          ),
+          Text(
+            'Space Voyager!',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              height: 1,
+              letterSpacing: 3.0,
+            ),
+          ),
+        ],
+      ),
+      Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: AssetImage('assets/images/image 10.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget searchBar() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color.fromARGB(255, 91, 89, 89),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 14),
+          child: TextField(
+            onChanged: (value) {},
+            decoration: InputDecoration(
+              hintText: 'Search your favorite place...',
+              border: InputBorder.none,
+              hintStyle:
+                  TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
+              suffixIcon: Icon(Icons.search,
+                  color: const Color.fromARGB(255, 255, 255, 255)),
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
 }

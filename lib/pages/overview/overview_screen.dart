@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_ahmenes_application/widgets.dart';
+import 'package:flutter_ahmenes_application/widgets/widgets.dart';
 
 List<List<String>> sliderData = [
   [
