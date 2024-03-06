@@ -39,6 +39,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
   void initState() {
     super.initState();
     updateData();
+    print(currentDate());
     futureApod = fetchApod(currentDate());
   }
 
@@ -67,6 +68,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
         isLoading = false;
       });
     });
+    print('After setState: $isLoading');
   }
 
   void updateData() {
@@ -188,6 +190,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                               ),
                               onPressed: () => setState(() {
                                 updateData();
+                                print(currentDate());
                                 futureApod = fetchApod(currentDate());
                               }),
                             ),

@@ -132,12 +132,10 @@ class _VRShowpageState extends State<VRShowpage> {
                                       padding: EdgeInsets.symmetric(
                                         vertical: 20,
                                         horizontal: 20,
-                                      ),
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      primary:
-                                          Color.fromARGB(115, 106, 107, 107),
                                     ),
                                   ),
                                 ),
@@ -200,12 +198,10 @@ class _VRShowpageState extends State<VRShowpage> {
                                       padding: EdgeInsets.symmetric(
                                         vertical: 20,
                                         horizontal: 20,
-                                      ),
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      primary:
-                                          Color.fromARGB(115, 106, 107, 107),
                                     ),
                                   ),
                                 ),
@@ -268,12 +264,10 @@ class _VRShowpageState extends State<VRShowpage> {
                                       padding: EdgeInsets.symmetric(
                                         vertical: 20,
                                         horizontal: 20,
-                                      ),
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      primary:
-                                          Color.fromARGB(115, 106, 107, 107),
                                     ),
                                   ),
                                 ),
@@ -360,12 +354,10 @@ class _VRShowpageState extends State<VRShowpage> {
                                       padding: EdgeInsets.symmetric(
                                         vertical: 20,
                                         horizontal: 20,
-                                      ),
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      primary:
-                                          Color.fromARGB(115, 106, 107, 107),
                                     ),
                                   ),
                                 ),
@@ -452,12 +444,10 @@ class _VRShowpageState extends State<VRShowpage> {
                                       padding: EdgeInsets.symmetric(
                                         vertical: 20,
                                         horizontal: 20,
-                                      ),
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      primary:
-                                          Color.fromARGB(115, 106, 107, 107),
                                     ),
                                   ),
                                 ),
@@ -544,12 +534,10 @@ class _VRShowpageState extends State<VRShowpage> {
                                       padding: EdgeInsets.symmetric(
                                         vertical: 20,
                                         horizontal: 20,
-                                      ),
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      primary:
-                                          Color.fromARGB(115, 106, 107, 107),
                                     ),
                                   ),
                                 ),
@@ -636,12 +624,10 @@ class _VRShowpageState extends State<VRShowpage> {
                                       padding: EdgeInsets.symmetric(
                                         vertical: 20,
                                         horizontal: 20,
-                                      ),
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(30),
                                       ),
-                                      primary:
-                                          Color.fromARGB(115, 106, 107, 107),
                                     ),
                                   ),
                                 ),

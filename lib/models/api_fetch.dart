@@ -1,21 +1,32 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter_ahmenes_application/global/common/toast.dart';
 import 'package:http/http.dart' as http;
 
 Future<Apod> fetchApod(date) async {
-  final response = await http.get(Uri.parse(
-      'https://api.nasa.gov/planetary/apod?api_key=8AdpOEvuLkF4fGJBno12wSm4H8Lzo4c0XApTHDeW&thumbs=true&date=$date'));
+  try {
+    final response = await http.get(Uri.parse(
+        'https://api.nasa.gov/planetary/apod?api_key=8AdpOEvuLkF4fGJBno12wSm4H8Lzo4c0XApTHDeW&thumbs=true&date=$date'));
 
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Apod.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Connection Failed!');
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return Apod.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw HttpException('${response.statusCode}');
+    }
+  } on SocketException {
+    showToast(message: 'No Internet connection 😑');
+  } on HttpException {
+    showToast(message: "Couldn't find the post 😱");
+  } on FormatException {
+    showToast(message: "Bad response format 👎");
   }
+  return Apod.fromJson(Null as Map<String, dynamic>);
 }
 
 class Apod {

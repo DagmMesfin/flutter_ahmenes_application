@@ -1,5 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_ahmenes_application/features/user_auth/firbase_auth_implementation/firebase_auth_services.dart';
+import 'package:flutter_ahmenes_application/global/common/toast.dart';
 import 'package:flutter_ahmenes_application/home_screen.dart';
+import 'package:flutter_ahmenes_application/main.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginOptionScreen extends StatelessWidget {
   const LoginOptionScreen({super.key});
@@ -161,9 +172,33 @@ class LoginOptionScreen extends StatelessWidget {
   }
 }
 
-class NewUserLogin extends StatelessWidget {
+class NewUserLogin extends StatefulWidget {
   const NewUserLogin({super.key});
 
+  @override
+  State<NewUserLogin> createState() => _NewUserLoginState();
+}
+
+class _NewUserLoginState extends State<NewUserLogin> {
+
+  bool _isSigningUp = false;
+
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose(){
+    _usernameController.dispose();
+       _emailController.dispose();
+          _passwordController.dispose();
+    
+    super.dispose();
+  }
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -244,8 +279,9 @@ class NewUserLogin extends StatelessWidget {
               children: [
                 // Name field
                 TextFormField(
+                  controller: _usernameController,
                   decoration: const InputDecoration(
-                      labelText: 'Your Name',
+                      labelText: 'Your Full Name',
                       labelStyle: TextStyle(color: Colors.white),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
@@ -262,6 +298,7 @@ class NewUserLogin extends StatelessWidget {
 
                 // Email field
                 TextFormField(
+                  controller: _emailController,
                   decoration: const InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.white),
@@ -280,6 +317,7 @@ class NewUserLogin extends StatelessWidget {
 
                 //password
                 TextFormField(
+                  controller: _passwordController,
                   decoration: const InputDecoration(
                       labelText: 'Password',
                       labelStyle: TextStyle(color: Colors.white),
@@ -303,83 +341,184 @@ class NewUserLogin extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            bottom: 50,
-            left: 20,
-            right: 20,
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigate to the OverviewScreen when the button is pressed
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Sign up',
-                          style: TextStyle(
-                            fontSize: 20,
-                            letterSpacing: 2.0,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(Icons.arrow_forward, color: Colors.black),
-                      ],
-                    ),
-                  ),
+         Positioned(
+  bottom: 50,
+  left: 20,
+  right: 20,
+  child: Column(
+    children: [
+      Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: TextButton(
+         onPressed: _SignUp, 
+  // Call the _SignUp method
+  
+
+
+
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.all(16),
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+         child: Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    _isSigningUp
+        ? CircularProgressIndicator(color: Colors.black)
+        : Text(
+            'Sign up',
+            style: TextStyle(
+              fontSize: 20,
+              letterSpacing: 2.0,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+    Icon(Icons.arrow_forward, color: Colors.black),
+  ],
+),
+
+        ),
+      ),
+      const SizedBox(height: 20),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Already have an account?', style: TextStyle(color: Colors.white, fontSize: 22)),
+          SizedBox(height: 5),
+          GestureDetector(
+            onTap: () {
+              // Handle the gesture when "Create New Account" is tapped
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => userlogin()),
+              );
+            },
+            child: const Center(
+              child: Text(
+                'Login',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontSize: 18,
+                  color: Colors.white,
+                  decorationColor: Colors.white,
                 ),
-                const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {
-                    // Handle the gesture when "Create New Account" is tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NewUserLogin()),
-                    );
-                  },
-                  child: const Center(
-                    child: Text(
-                      'Terms and Conditions',
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 18,
-                          color: Colors.white,
-                          decorationColor: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],
       ),
+      const SizedBox(height: 5),
+      GestureDetector(
+        onTap: () {
+          // Handle the gesture when "Create New Account" is tapped
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NewUserLogin()),
+          );
+        },
+        child: const Center(
+          child: Text(
+            'Terms and Conditions',
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+              fontSize: 18,
+              color: Colors.white,
+              decorationColor: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
+        ],
+      ),
     );
+
+    
   }
+    // ignore: non_constant_identifier_names
+ void _SignUp() async {
+
+  setState((){
+    _isSigningUp= true;
+  });
+
+  String username = _usernameController.text;
+  String email = _emailController.text;
+  String password = _passwordController.text;
+  
+  User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+ setState((){
+    _isSigningUp= false;
+  });
+
+  if (user != null) {
+    showToast(message: 'User successfully created');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+  } else {
+    showToast(message: 'Some error happened');
+  }
+
+  addUserDetails(
+    _usernameController.text.trim(),
+    _emailController.text.trim(),
+    _passwordController.text.trim()
+  );
 }
 
-class userlogin extends StatelessWidget {
+
+Future addUserDetails(String fullName, String email, String password) async {
+  await FirebaseFirestore.instance.collection('users').add({
+
+    'full name':fullName,
+    'email':email ,
+    'password':password,
+  });
+}
+
+}
+
+class userlogin extends StatefulWidget {
   const userlogin({super.key});
 
+  @override
+  State<userlogin> createState() => _userloginState();
+}
+
+class _userloginState extends State<userlogin> {
+
+  bool _isSigning =false;
+  
+  final FirebaseAuthService _auth = FirebaseAuthService();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+ 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose(){
+
+       _emailController.dispose();
+          _passwordController.dispose();
+    
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -463,6 +602,7 @@ class userlogin extends StatelessWidget {
 
                 // Email field
                 TextFormField(
+                  controller: _emailController,
                   decoration: const InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.white),
@@ -481,6 +621,7 @@ class userlogin extends StatelessWidget {
 
                 //password
                 TextFormField(
+                  controller: _passwordController,
                   decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle: const TextStyle(color: Colors.white),
@@ -497,43 +638,40 @@ class userlogin extends StatelessWidget {
                             size: 5,
                           ))),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 5),
               ],
             ),
           ),
-          Positioned(
-            bottom: 50,
-            left: 20,
-            right: 20,
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigate to the OverviewScreen when the button is pressed
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'log in',
+         Container(
+  child: Positioned(
+    bottom: 50,
+    left: 20,
+    right: 20,
+    child: SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: TextButton(
+              onPressed: _SignIn,
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.all(16),
+                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _isSigning
+                      ? CircularProgressIndicator(color: Colors.black)
+                      : Text(
+                          'Log In',
                           style: TextStyle(
                             fontSize: 20,
                             letterSpacing: 2.0,
@@ -541,31 +679,160 @@ class userlogin extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Icon(Icons.arrow_forward, color: Colors.black),
-                      ],
-                    ),
-                  ),
+                  Icon(Icons.arrow_forward, color: Colors.black),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 5),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 85, 155, 241),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: TextButton(
+              onPressed: _signInWithGoogle,
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.all(16),
+                backgroundColor: Color.fromARGB(255, 85, 155, 241),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                const SizedBox(height: 20),
-                GestureDetector(
-                  onTap: () {},
-                  child: const Center(
-                    child: Text(
-                      'forget password?',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white,
-                        fontSize: 18,
-                        color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(FontAwesomeIcons.google, color: Colors.black),
+                      SizedBox(width: 5),
+                      Text(
+                        'Sign in with Google',
+                        style: TextStyle(
+                          fontSize: 20,
+                          letterSpacing: 2.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  
+                
+                ],
+                
+              ),
+            ),
+          ),
+            Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Do you have an account?', style: TextStyle(color: Colors.white)),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => NewUserLogin()),
+                          );
+                        },
+                        child: const Center(
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              decoration: TextDecoration.underline,
+                              fontSize: 22,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              decorationColor: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Center(
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: Colors.white,
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
+        ],
+        
+      ),
+    ),
+  ),
+)
+
         ],
       ),
     );
   }
+
+   // ignore: non_constant_identifier_names
+ void _SignIn() async {
+  setState(() {
+    _isSigning = true;
+  });
+
+  String email = _emailController.text;
+  String password = _passwordController.text;
+
+  // Use your FirebaseAuthService instance
+  FirebaseAuthService _authService = FirebaseAuthService();
+
+  User? user = await _authService.signInWithEmailAndPassword(email, password);
+
+  setState(() {
+    _isSigning = false;
+  });
+
+  if (user != null) {
+    showToast(message: 'User successfully created');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+  } else {
+    showToast(message: 'Some error happened');
+  }
+}
+_signInWithGoogle() async{
+
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  try{
+
+    final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+    if(googleSignInAccount != null){
+
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken,
+      );
+      await _firebaseAuth.signInWithCredential(credential);
+       Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+      
+    }
+  } catch(e){
+    showToast(message: 'some error occured $e');
+  }
+
+}
 }

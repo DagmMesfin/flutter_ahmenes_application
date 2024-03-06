@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "885187451260",
+    "project_id": "picture-of-the-day-67e3f",
+    "storage_bucket": "picture-of-the-day-67e3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885187451260:android:1e439b8c5423477efb6cf9",
+        "android_client_info": {
+          "package_name": "com.example.flutter_ahmenes_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-ptJwhTLvtPwSvjmFQZ2BMOaVAgYD2S8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
