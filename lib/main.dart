@@ -17,7 +17,7 @@ Future main() async {
   ));
 
   FirebaseFirestore.instance.settings = Settings(
-    persistenceEnabled: true, // Enable offline data persistence
+    persistenceEnabled: true,
   );
   runApp(MyApp());
 }

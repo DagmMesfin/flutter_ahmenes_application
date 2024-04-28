@@ -1,11 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/fucntions/current_date.dart';
 import 'package:flutter_ahmenes_application/fucntions/date_randomizer.dart';
 import 'package:flutter_ahmenes_application/models/api_fetch.dart';
+import 'package:flutter_ahmenes_application/models/user_model.dart';
 import 'package:flutter_ahmenes_application/widgets/fullscreen_show.dart';
 import 'package:flutter_ahmenes_application/widgets/loading_animation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 
 class HomeScreenContentPage extends StatefulWidget {
   const HomeScreenContentPage({super.key});
@@ -18,6 +23,19 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
   late Future<Apod> futureApod;
   DateTime selectedDate = DateTime.now();
   String? _result;
+  UserModel user = UserModel.empty();
+  var store = FirebaseFirestore.instance;
+  var isLoading = false;
+
+  void fetchUserData() async {
+    var docs = await store
+        .collection("users")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    setState(() {
+      user = UserModel.fromSnapshot(docs);
+    });
+  }
 
   Future<String?> _getFileType(String url) async {
     final response = await http.head(Uri.parse(url));
@@ -26,11 +44,17 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
   }
 
   Future<String> fileTypo(String url) async {
-    final mimeType = await _getFileType(url);
+    try {
+      final mimeType = await _getFileType(url);
 
-    setState(() {
-      _result = mimeType;
-    });
+      if (mounted) {
+        setState(() {
+          _result = mimeType;
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
 
     return '';
   }
@@ -59,8 +83,6 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
     }
   }
 
-  bool isLoading = false;
-
   void loadData() {
     // Simulating data loading process
     Future.delayed(Duration(seconds: 3), () {
@@ -73,6 +95,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
 
   void updateData() {
     setState(() {
+      fetchUserData();
       isLoading = true;
       loadData();
     });
@@ -140,8 +163,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/image 10.jpg'),
+                                    image: NetworkImage(user.profilepic),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -314,17 +336,15 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                       width: size.width * 0.8,
                                       child: Wrap(
                                         children: [
-                                          Text(
-                                            snapshot.data!.explanation!,
-                                            textAlign: TextAlign.justify,
-                                            softWrap: true,
-                                            style: TextStyle(
-                                              fontSize: 17,
-                                              color: Colors.white,
-                                              height: 1,
-                                              letterSpacing: 1.0,
-                                            ),
-                                          ),
+                                          Text(snapshot.data!.explanation!,
+                                              textAlign: TextAlign.justify,
+                                              softWrap: true,
+                                              style: GoogleFonts.titilliumWeb(
+                                                fontSize: 18,
+                                                color: Colors.white,
+                                                height: 1,
+                                                letterSpacing: 1.0,
+                                              )),
                                         ],
                                       ),
                                     )
@@ -332,10 +352,21 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                 ),
                               );
                             } else if (snapshot.hasError) {
-                              return Text('${snapshot.error}');
+                              return Center(
+                                child: Column(
+                                  children: [
+                                    LottieBuilder.asset("assets/anim/ufo.json"),
+                                    Text(
+                                      "Oops! Try in a bit!",
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                              );
                             }
-                            // By default, show a loading spinner.
-                            return Text('');
+
+                            return Text("");
                           },
                         ),
                 ],

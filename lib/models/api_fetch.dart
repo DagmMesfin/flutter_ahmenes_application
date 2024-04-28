@@ -25,6 +25,8 @@ Future<Apod> fetchApod(date) async {
     showToast(message: "Couldn't find the post 😱");
   } on FormatException {
     showToast(message: "Bad response format 👎");
+  } catch (e) {
+    showToast(message: "Error: $e");
   }
   return Apod.fromJson(Null as Map<String, dynamic>);
 }

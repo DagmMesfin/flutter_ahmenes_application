@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/pages/HomeScreenContent_page.dart';
 import 'package:flutter_ahmenes_application/pages/VrShow_Page.dart';
-import 'pages/profile/ProfilePage.dart';
+import 'package:flutter_ahmenes_application/pages/profile/screens/account_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> pages = [
     HomeScreenContentPage(),
     VRShowpage(),
-    ProfilePage(),
+    AccountScreen(),
   ];
   int currentPage = 0;
 
