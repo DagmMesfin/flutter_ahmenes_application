@@ -534,8 +534,6 @@ class _userloginState extends State<userlogin> {
               Navigator.pop(context);
             },
             child: Container(
-              height: height,
-              width: width,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 93, 92, 92),
@@ -642,8 +640,6 @@ class _userloginState extends State<userlogin> {
           ),
         ),
         Container(
-          height: height,
-          width: width,
           child: Positioned(
             bottom: 50,
             left: 20,
@@ -651,8 +647,6 @@ class _userloginState extends State<userlogin> {
             child: Column(
               children: [
                 Container(
-                  height: height,
-                  width: width,
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.white,
