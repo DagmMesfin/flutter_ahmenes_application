@@ -199,35 +199,15 @@ class _NewUserLoginState extends State<NewUserLogin> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Background Image (Replace with your desired background image)
           const Image(
             image: AssetImage('assets/images/image 8.jpg'),
             fit: BoxFit.cover,
-          ),
-          Positioned(
-            top: 50,
-            left: 40,
-            child: GestureDetector(
-              onTap: () {
-                // Handle back button press (navigate to previous page)
-                Navigator.pop(context);
-              },
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 93, 92, 92),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-              ),
-            ),
           ),
           const Positioned(
             top: 110,
@@ -235,119 +215,97 @@ class _NewUserLoginState extends State<NewUserLogin> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Let\'s',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.white,
-                        height: 1,
-                        letterSpacing: 3.0,
-                      ),
-                    ),
-                  ],
+                Text(
+                  'Let\'s',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    height: 1,
+                    letterSpacing: 3.0,
+                  ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Start',
-                      style: TextStyle(
-                        fontSize: 63,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        height: 1,
-                        letterSpacing: 3.0,
-                      ),
-                    ),
-                  ],
+                Text(
+                  'Start',
+                  style: TextStyle(
+                    fontSize: 63,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    height: 1,
+                    letterSpacing: 3.0,
+                  ),
                 ),
                 SizedBox(height: 250),
               ],
             ),
           ),
-
-          Padding(
+          SingleChildScrollView(
             padding: const EdgeInsets.all(55),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Name field
+                SizedBox(height: height * 0.2), // Adjust height as needed
                 TextFormField(
                   style: TextStyle(color: Colors.white),
                   controller: _usernameController,
                   decoration: const InputDecoration(
-                      labelText: 'Your Full Name',
-                      labelStyle: TextStyle(color: Colors.white),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      suffixIcon: Icon(
-                        Icons.person,
-                        size: 5,
-                      )),
+                    labelText: 'Your Full Name',
+                    labelStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    suffixIcon: Icon(
+                      Icons.person,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 20),
-
-                // Email field
                 TextFormField(
                   controller: _emailController,
                   style: TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
-                      labelText: 'Email',
-                      labelStyle: TextStyle(color: Colors.white),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      suffixIcon: Icon(
-                        Icons.email_outlined,
-                        size: 5,
-                      )),
+                    labelText: 'Email',
+                    labelStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    suffixIcon: Icon(
+                      Icons.email_outlined,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 20),
-
-                //password
                 TextFormField(
                   controller: _passwordController,
+                  obscureText: true,
                   style: TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
-                      labelText: 'Password',
-                      labelStyle: TextStyle(color: Colors.white),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      suffixIcon: Icon(
-                        Icons.password,
-                        size: 5,
-                      )),
+                    labelText: 'Password',
+                    labelStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    suffixIcon: Icon(
+                      Icons.visibility_off,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 20),
-
-                // ... (Sign up button code)
-
-                // Terms and Conditions
-                // ... (Terms and Conditions code)
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 50,
-            left: 20,
-            right: 20,
-            child: Column(
-              children: [
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -356,11 +314,9 @@ class _NewUserLoginState extends State<NewUserLogin> {
                   ),
                   child: TextButton(
                     onPressed: _SignUp,
-                    // Call the _SignUp method
-
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(16),
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -371,7 +327,7 @@ class _NewUserLoginState extends State<NewUserLogin> {
                         _isSigningUp
                             ? CircularProgressIndicator(color: Colors.black)
                             : Text(
-                                'Sign up',
+                                'Sign Up',
                                 style: TextStyle(
                                   fontSize: 20,
                                   letterSpacing: 2.0,
@@ -389,11 +345,10 @@ class _NewUserLoginState extends State<NewUserLogin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Already have an account?',
-                        style: TextStyle(color: Colors.white, fontSize: 22)),
-                    SizedBox(height: 5),
+                        style: TextStyle(color: Colors.white, fontSize: 15)),
+                    const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
-                        // Handle the gesture when "Create New Account" is tapped
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => userlogin()),
@@ -404,24 +359,17 @@ class _NewUserLoginState extends State<NewUserLogin> {
                           'Login',
                           style: TextStyle(
                             decoration: TextDecoration.underline,
-                            fontSize: 18,
+                            fontSize: 20,
                             color: Colors.white,
-                            decorationColor: Colors.white,
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 GestureDetector(
-                  onTap: () {
-                    // Handle the gesture when "Create New Account" is tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NewUserLogin()),
-                    );
-                  },
+                  onTap: () {},
                   child: const Center(
                     child: Text(
                       'Terms and Conditions',
@@ -429,12 +377,31 @@ class _NewUserLoginState extends State<NewUserLogin> {
                         decoration: TextDecoration.underline,
                         fontSize: 18,
                         color: Colors.white,
-                        decorationColor: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: 40,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 93, 92, 92),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ],
@@ -517,89 +484,52 @@ class _userloginState extends State<userlogin> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Stack(
-      fit: StackFit.expand,
-      children: [
-        // Background Image (Replace with your desired background image)
-        const Image(
-          image: AssetImage('assets/images/image 8.jpg'),
-          fit: BoxFit.cover,
-        ),
-        Positioned(
-          top: 50,
-          left: 40,
-          child: GestureDetector(
-            onTap: () {
-              // Handle back button press (navigate to previous page)
-              Navigator.pop(context);
-            },
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 93, 92, 92),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
+      resizeToAvoidBottomInset: true,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          const Image(
+            image: AssetImage('assets/images/image 8.jpg'),
+            fit: BoxFit.cover,
+          ),
+          const Positioned(
+            top: 110,
+            left: 55,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Welcome',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    letterSpacing: 3.0,
+                  ),
+                ),
+                Text(
+                  'Back',
+                  style: TextStyle(
+                    fontSize: 63,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    letterSpacing: 3.0,
+                  ),
+                ),
+                SizedBox(height: 180),
+              ],
             ),
           ),
-        ),
-        const SizedBox(height: 10),
-        const Positioned(
-          top: 110,
-          left: 55,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white,
-                      height: 1,
-                      letterSpacing: 3.0,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Back',
-                    style: TextStyle(
-                      fontSize: 63,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      height: 1,
-                      letterSpacing: 3.0,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 250),
-            ],
-          ),
-        ),
-
-        Padding(
-          padding: const EdgeInsets.all(55),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Name field
-
-              // Email field
-              TextFormField(
-                controller: _emailController,
-                style: TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
+          SingleChildScrollView(
+            padding: const EdgeInsets.all(55),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: height * 0.35), // Adjust height as needed
+                TextFormField(
+                  controller: _emailController,
+                  style: TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                     labelStyle: TextStyle(color: Colors.white),
                     enabledBorder: UnderlineInputBorder(
@@ -610,16 +540,17 @@ class _userloginState extends State<userlogin> {
                     ),
                     suffixIcon: Icon(
                       Icons.email_outlined,
-                      size: 5,
-                    )),
-              ),
-              const SizedBox(height: 20),
-
-              //password
-              TextFormField(
-                controller: _passwordController,
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
                     labelText: 'Password',
                     labelStyle: const TextStyle(color: Colors.white),
                     enabledBorder: const UnderlineInputBorder(
@@ -629,23 +560,16 @@ class _userloginState extends State<userlogin> {
                       borderSide: BorderSide(color: Colors.white),
                     ),
                     suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.password,
-                          size: 5,
-                        ))),
-              ),
-              const SizedBox(height: 5),
-            ],
-          ),
-        ),
-        Container(
-          child: Positioned(
-            bottom: 50,
-            left: 20,
-            right: 20,
-            child: Column(
-              children: [
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.visibility_off,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -656,7 +580,7 @@ class _userloginState extends State<userlogin> {
                     onPressed: _SignIn,
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(16),
-                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -680,7 +604,7 @@ class _userloginState extends State<userlogin> {
                     ),
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -696,28 +620,25 @@ class _userloginState extends State<userlogin> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Column(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(FontAwesomeIcons.google, color: Colors.black),
-                            SizedBox(width: 5),
-                            Text(
-                              'Sign in with Google',
-                              style: TextStyle(
-                                fontSize: 20,
-                                letterSpacing: 2.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                        Icon(FontAwesomeIcons.google, color: Colors.white),
+                        SizedBox(width: 10),
+                        Text(
+                          'Sign in with Google',
+                          style: TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 2.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -732,42 +653,56 @@ class _userloginState extends State<userlogin> {
                               builder: (context) => NewUserLogin()),
                         );
                       },
-                      child: const Center(
-                        child: Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            decoration: TextDecoration.underline,
-                            fontSize: 22,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            decorationColor: Colors.white,
-                          ),
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          decoration: TextDecoration.underline,
+                          fontSize: 22,
+                          color: Colors.white,
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 10),
                 GestureDetector(
                   onTap: () {},
-                  child: const Center(
-                    child: Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white,
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 18,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-        )
-      ],
-    ));
+          Positioned(
+            top: 50,
+            left: 40,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 93, 92, 92),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   // ignore: non_constant_identifier_names
