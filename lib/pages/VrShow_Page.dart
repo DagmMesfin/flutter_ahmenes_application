@@ -6,6 +6,7 @@ import 'package:flutter_ahmenes_application/widgets/fullscreen_show.dart';
 import 'package:flutter_ahmenes_application/widgets/loading_animation.dart';
 import 'package:flutter_ahmenes_application/widgets/widgets.dart';
 import 'package:intl/intl.dart';
+import 'dart:math' as math;
 
 class VRShowpage extends StatefulWidget {
   const VRShowpage({super.key});
@@ -123,8 +124,80 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
-                                    },
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DummyPage()),
+            );
+          },
+                                    icon: Icon(Icons.arrow_forward,
+                                        color: Colors.white),
+                                    label: Text(''),
+                                    style: ElevatedButton.styleFrom(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 20,
+                                        horizontal: 20,
+                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: 400,
+                            height: 200,
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: Image.asset(
+                                    'assets/images/image 12.jpg',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 40,
+                                  left: 10,
+                                  child: Text(
+                                    'insightful',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 10,
+                                  left: 10,
+                                  child: Text(
+                                    'Astronomy',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 10,
+                                  right: 10,
+                                  child: ElevatedButton.icon(
+                                   onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DummyPage()),
+            );
+          },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
                                     label: Text(''),
@@ -189,74 +262,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
-                                    },
-                                    icon: Icon(Icons.arrow_forward,
-                                        color: Colors.white),
-                                    label: Text(''),
-                                    style: ElevatedButton.styleFrom(
-                                      padding: EdgeInsets.symmetric(
-                                        vertical: 20,
-                                        horizontal: 20,
-                                      ), backgroundColor: Color.fromARGB(115, 106, 107, 107),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 400,
-                            height: 200,
-                            margin: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Image.asset(
-                                    'assets/images/image 12.jpg',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 40,
-                                  left: 10,
-                                  child: Text(
-                                    'insightful',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 10,
-                                  left: 10,
-                                  child: Text(
-                                    'Astronomy',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 10,
-                                  right: 10,
-                                  child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Button action
-                                    },
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DummyPage()),
+            );
+          },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
                                     label: Text(''),
@@ -344,9 +354,12 @@ class _VRShowpageState extends State<VRShowpage> {
                                   bottom: 10,
                                   right: 10,
                                   child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Button action
-                                    },
+                                     onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DummyPage()),
+            );
+          },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
                                     label: Text(''),
@@ -434,9 +447,12 @@ class _VRShowpageState extends State<VRShowpage> {
                                   bottom: 10,
                                   right: 10,
                                   child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Button action
-                                    },
+                                     onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DummyPage()),
+            );
+          },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
                                     label: Text(''),
@@ -524,9 +540,12 @@ class _VRShowpageState extends State<VRShowpage> {
                                   bottom: 10,
                                   right: 10,
                                   child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Button action
-                                    },
+                                     onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DummyPage()),
+            );
+          },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
                                     label: Text(''),
@@ -614,9 +633,12 @@ class _VRShowpageState extends State<VRShowpage> {
                                   bottom: 10,
                                   right: 10,
                                   child: ElevatedButton.icon(
-                                    onPressed: () {
-                                      // Button action
-                                    },
+                                     onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DummyPage()),
+            );
+          },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
                                     label: Text(''),
@@ -642,6 +664,91 @@ class _VRShowpageState extends State<VRShowpage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+
+
+
+  
+}
+
+class DummyPage extends StatefulWidget {
+  @override
+  _DummyPageState createState() => _DummyPageState();
+}
+
+class _DummyPageState extends State<DummyPage> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          BackgroundImage(),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: AnimatedBuilder(
+                    animation: _controller,
+                    builder: (context, child) {
+                      int frame = (_controller.value * 30).floor() % 30;
+                      return Image.asset('assets/anim/Animation - 1716368039873_${frame.toString().padLeft(2, '0')}.json');
+                    },
+                  ),
+                ),
+                SizedBox(height: 20),
+                Image.asset(
+                  'assets/images/ahamenes-branding.png',
+                  width: 100.0,
+                  height: 100.0,
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Coming Soon',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BackgroundImage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/image 4.jpg'),
+          fit: BoxFit.cover,
         ),
       ),
     );
