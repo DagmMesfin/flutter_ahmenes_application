@@ -152,51 +152,6 @@ Widget buildIndicator(int i, context) {
       ));
 }
 
-Widget titleBar() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Welcome onboard,',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.normal,
-              color: Colors.white,
-              height: 1,
-              letterSpacing: 3.0,
-            ),
-          ),
-          Text(
-            'Space Voyager!',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              height: 1,
-              letterSpacing: 3.0,
-            ),
-          ),
-        ],
-      ),
-      Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage('assets/images/image 10.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
 Widget searchBar() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
