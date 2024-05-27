@@ -5,6 +5,7 @@ import 'package:flutter_ahmenes_application/fucntions/current_date.dart';
 import 'package:flutter_ahmenes_application/fucntions/date_randomizer.dart';
 import 'package:flutter_ahmenes_application/models/api_fetch.dart';
 import 'package:flutter_ahmenes_application/models/user_model.dart';
+import 'package:flutter_ahmenes_application/pages/dummypage.dart';
 import 'package:flutter_ahmenes_application/widgets/fullscreen_show.dart';
 import 'package:flutter_ahmenes_application/widgets/loading_animation.dart';
 import 'package:flutter_ahmenes_application/widgets/widgets.dart';
@@ -209,7 +210,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DummyPage()),
+                                      );
                                     },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
@@ -277,7 +282,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DummyPage()),
+                                      );
                                     },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
@@ -345,7 +354,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DummyPage()),
+                                      );
                                     },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
@@ -437,7 +450,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DummyPage()),
+                                      );
                                     },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
@@ -529,7 +546,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DummyPage()),
+                                      );
                                     },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
@@ -621,7 +642,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DummyPage()),
+                                      );
                                     },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
@@ -713,7 +738,11 @@ class _VRShowpageState extends State<VRShowpage> {
                                   right: 10,
                                   child: ElevatedButton.icon(
                                     onPressed: () {
-                                      // Button action
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DummyPage()),
+                                      );
                                     },
                                     icon: Icon(Icons.arrow_forward,
                                         color: Colors.white),
