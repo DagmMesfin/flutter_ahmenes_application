@@ -174,50 +174,80 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                       )
                     ],
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 24),
                   Container(
-                      height: 40,
+                      height: 70,
                       width: size.width * 0.8,
                       decoration: BoxDecoration(
                           color: Color.fromARGB(181, 58, 57, 57),
                           borderRadius: BorderRadius.circular(6)),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            IconButton(
-                              icon: ImageIcon(
-                                AssetImage('assets/icons/calendar_clock.png'),
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                size: 30,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  IconButton(
+                                    icon: ImageIcon(
+                                      AssetImage(
+                                          'assets/icons/calendar_clock.png'),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255),
+                                      size: 30,
+                                    ),
+                                    onPressed: () => _selectDate(context),
+                                  ),
+                                  Text(
+                                    "Custom",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
                               ),
-                              onPressed: () => _selectDate(context),
-                            ),
-                            IconButton(
-                              icon: ImageIcon(
-                                AssetImage('assets/icons/calendar.png'),
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                size: 30,
+                              Column(
+                                children: [
+                                  IconButton(
+                                    icon: ImageIcon(
+                                      AssetImage('assets/icons/calendar.png'),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255),
+                                      size: 30,
+                                    ),
+                                    onPressed: () => setState(() {
+                                      updateData();
+                                      futureApod = fetchApod(getRandomDate());
+                                    }),
+                                  ),
+                                  Text(
+                                    "Random",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
                               ),
-                              onPressed: () => setState(() {
-                                updateData();
-                                futureApod = fetchApod(getRandomDate());
-                              }),
-                            ),
-                            IconButton(
-                              icon: ImageIcon(
-                                AssetImage('assets/icons/early_on.png'),
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                size: 30,
+                              Column(
+                                children: [
+                                  IconButton(
+                                    icon: ImageIcon(
+                                      AssetImage('assets/icons/early_on.png'),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255),
+                                      size: 30,
+                                    ),
+                                    onPressed: () => setState(() {
+                                      updateData();
+                                      print(currentDate());
+                                      futureApod = fetchApod(currentDate());
+                                    }),
+                                  ),
+                                  Text(
+                                    "Today",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
                               ),
-                              onPressed: () => setState(() {
-                                updateData();
-                                print(currentDate());
-                                futureApod = fetchApod(currentDate());
-                              }),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                       )),
                   SizedBox(
                     height: 20,
