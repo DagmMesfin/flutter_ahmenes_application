@@ -48,6 +48,8 @@ dependencies:
   image_picker: ^1.0.7
   google_fonts: ^6.2.1
   flutter_native_splash: ^2.4.0
+  shared_preferences: ^2.0.8
+  url_launcher: ^6.0.20
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/features/user_auth/firbase_auth_implementation/firebase_auth_services.dart';
 import 'package:flutter_ahmenes_application/models/user_model.dart';
 import 'package:flutter_ahmenes_application/pages/profile/screens/edit_screen.dart';
+import 'package:flutter_ahmenes_application/pages/profile/screens/about_us.dart';
 import 'package:flutter_ahmenes_application/pages/profile/widgets/forward_button.dart';
 import 'package:flutter_ahmenes_application/pages/profile/widgets/setting_item.dart';
 import 'package:flutter_ahmenes_application/pages/profile/widgets/setting_switch.dart';
+
 import 'package:ionicons/ionicons.dart';
 
 class AccountScreen extends StatefulWidget {
@@ -162,6 +164,20 @@ class _AccountScreenState extends State<AccountScreen> {
                 iconColor: Colors.red,
                 onTap: () => fire.signOut(context),
               ),
+              const SizedBox(height: 20),
+              SettingItem(
+                  title: "About Us",
+                  icon: Ionicons.people,
+                  bgColor: Colors.purple.shade100,
+                  iconColor: Colors.purple,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AboutPage(),
+                      ),
+                    );
+                  }),
             ],
           ),
         ),

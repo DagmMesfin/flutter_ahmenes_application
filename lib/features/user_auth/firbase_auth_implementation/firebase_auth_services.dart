@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/global/common/toast.dart';
+import 'package:flutter_ahmenes_application/models/prefs.dart';
 import 'package:flutter_ahmenes_application/pages/overview/start_point.dart';
 
 class FirebaseAuthService {
@@ -42,6 +43,7 @@ class FirebaseAuthService {
 
   signOut(context) async {
     await _auth.signOut();
+    await saveLoginState(false);
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => LoginOptionScreen()));
   }

@@ -8,6 +8,7 @@ import 'package:flutter_ahmenes_application/features/user_auth/firbase_auth_impl
 import 'package:flutter_ahmenes_application/global/common/toast.dart';
 import 'package:flutter_ahmenes_application/home_screen.dart';
 import 'package:flutter_ahmenes_application/main.dart';
+import 'package:flutter_ahmenes_application/models/prefs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -729,6 +730,7 @@ class _userloginState extends State<userlogin> {
         user.sendEmailVerification();
       } else {
         showToast(message: 'Login Successfully');
+        await saveLoginState(true);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -755,6 +757,7 @@ class _userloginState extends State<userlogin> {
           accessToken: googleSignInAuthentication.accessToken,
         );
         await _firebaseAuth.signInWithCredential(credential);
+        await saveLoginState(true);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),

@@ -26,9 +26,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   var namecont = TextEditingController();
   var usernamecont = TextEditingController();
 
-  final picker = ImagePicker();
-  XFile? pickedFile;
-
   void fetchUserData() async {
     var docs = await store
         .collection("users")
@@ -71,32 +68,46 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   Widget build(BuildContext context) {
     var url = user.profilepic;
 
-    void uploadImageToFirestore() async {
-      if (pickedFile != null) {
-        final imageFile = File(pickedFile!.path);
+    File? _imageFile;
+    String? _imageUrl;
+
+    final ImagePicker _picker = ImagePicker();
+
+    Future<void> uploadImageToFirestore() async {
+      if (_imageFile != null) {
         final storageRef = FirebaseStorage.instance
             .ref()
             .child('images/${DateTime.now().toString()}');
-        final uploadTask = storageRef.putFile(imageFile);
+        final uploadTask = storageRef.putFile(_imageFile!);
 
-        // Monitor the upload task
-        await uploadTask.whenComplete(() {
-          // Get the download URL
-          storageRef.getDownloadURL().then((imageUrl) {
-            // Store the download URL in Firestore
-            setState(() {
-              url = imageUrl;
-            });
+        try {
+          final snapshot = await uploadTask.whenComplete(() {});
+          final imageUrl = await snapshot.ref.getDownloadURL();
+
+          // Store the download URL in Firestore
+          await FirebaseFirestore.instance.collection('images').add({
+            'url': imageUrl,
+            'timestamp': FieldValue.serverTimestamp(),
           });
-        });
+
+          setState(() {
+            _imageUrl = imageUrl;
+            url = _imageUrl!;
+            print(url);
+          });
+        } catch (e) {
+          // Handle errors if any
+          print('Error uploading image: $e');
+        }
       }
     }
 
     Future<void> pickImage() async {
-      final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-      if (pickedImage != null) {
+      final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+      if (pickedFile != null) {
         setState(() {
-          pickedFile = pickedImage;
+          _imageFile = File(pickedFile.path);
           uploadImageToFirestore();
         });
       }
