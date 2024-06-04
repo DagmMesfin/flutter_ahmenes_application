@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ahmenes_application/global/common/toast.dart';
 import 'dart:ui';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,28 +24,41 @@ class AhamenesApp extends StatelessWidget {
 class AboutPage extends StatelessWidget {
   final List<TeamMember> teamMembers = [
     TeamMember(
+      name: 'Dagmawi Esayas',
+      role: 'The Leader',
+      avatar: 'assets/images/babi.jpg',
+      email: '1babidagi@gmail.com',
+      linkedIn: 'https://www.linkedin.com/in/dagmawibabi/',
+      gitHub: 'https://github.com/dagmawibabi',
+      bio:
+          'Dagmawi Esayas, also known as Dagmawi Babi, is a visionary space enthusiast and the esteemed leader of the space club. As the club leader, Dagmawi Babi has fearlessly charted new frontiers and organized numerous intergalactic expeditions, all while fostering a sense of camaraderie among his fellow cadets. His leadership style is characterized by a blend of unwavering determination and infectious enthusiasm, making him an inspiration to all who share his love for the cosmos.',
+    ),
+    TeamMember(
       name: 'Dagim Mesfin',
-      role: 'Mobile Developer',
+      role: 'The Mobile Dev.',
       avatar: 'assets/images/dagim_mesfin.jpg',
       email: 'dagmmesfin99@gmail.com',
       linkedIn: 'https://www.linkedin.com/in/dagimmesfin',
+      gitHub: 'https://github.com/DagmMesfin',
       bio:
           'Dagim Mesfin, a visionary Flutter mobile developer, soars through the cosmic realms of digital innovation with unmatched creativity and precision. In the ever-expanding universe of app development, he is a celestial navigator, skillfully weaving together the constellations of code and design. His passion for crafting seamless and enchanting user experiences is as boundless as the cosmos, illuminating each project with a touch of the extraordinary.',
     ),
     TeamMember(
       name: 'Dagmawi Ayenew',
-      role: 'Mobile Developer',
+      role: 'The Mobile Dev.',
       avatar: 'assets/images/dagmawi_ayenew.jpg',
       email: 'aaydagi77@gmail.com',
       linkedIn: 'https://www.linkedin.com/in/dagmawi-ayenew-3889a8296/',
+      gitHub: 'https://github.com/Dagiayy',
       bio:
           'Dagmawi Ayenew is an intrepid mobile developer, navigating the vast digital cosmos with unparalleled skill and ingenuity. With a mind as expansive as the universe, he crafts stellar mobile applications that transcend the ordinary, constantly pushing the boundaries of what’s possible in the mobile realm.',
     ),
     TeamMember(
       name: 'Yohannes Getachew',
-      role: 'UI/UX Design',
+      role: 'The UI/UX Designer',
       avatar: 'assets/images/jj.jpg',
       email: 'yohannesgetachewerieso@gmail.com',
+      gitHub: 'https://github.com/yohhannees',
       linkedIn: 'https://www.linkedin.com/in/yohannes-getachew-667a1b241',
       bio:
           'Yohannes Getachew, a stellar UI/UX designer, ventures through the cosmos of digital design with the grace of a seasoned space cadet. His passion for crafting delightful user experiences is as boundless as the universe itself. With each project, he navigates the intricate constellations of code and design, creating interfaces that captivate and inspire, leaving a trail of stellar experiences in his wake.',
@@ -55,7 +69,7 @@ class AboutPage extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      throw 'Could not launch $uri';
+      showToast(message: 'Could not launch $uri');
     }
   }
 
@@ -130,6 +144,7 @@ class AboutPage extends StatelessWidget {
             child: Text(
               'Ahamenes Space Science and Technology Club',
               style: TextStyle(
+                  fontFamily: "kontakt",
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
@@ -143,9 +158,12 @@ class AboutPage extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Text(
-            'Behind the APOD',
+            'Behind the Magic',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                fontFamily: "kontakt",
+                fontStyle: FontStyle.italic,
+                fontSize: 19,
+                color: Colors.white),
           ),
           SizedBox(height: 10),
           Column(
@@ -165,6 +183,7 @@ class AboutPage extends StatelessWidget {
                     title: Text(
                       member.name,
                       style: TextStyle(
+                          fontFamily: "exan",
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 17),
@@ -215,7 +234,10 @@ class AboutPage extends StatelessWidget {
               },
               child: Text(
                 'Join Us',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    fontFamily: "exan",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
           ),
@@ -224,6 +246,7 @@ class AboutPage extends StatelessWidget {
             child: Text(
               'Connect with Us',
               style: TextStyle(
+                  fontFamily: "canis minor",
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
@@ -286,7 +309,9 @@ class AboutPage extends StatelessWidget {
                   title: Text(
                     member.name,
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        fontFamily: "exan",
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -299,7 +324,10 @@ class AboutPage extends StatelessWidget {
                       Text(
                         member.role,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontStyle: FontStyle.italic),
                       ),
                       SizedBox(height: 10),
                       Text(
@@ -311,16 +339,23 @@ class AboutPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.email, color: Colors.white),
+                            icon: Icon(Ionicons.mail, color: Colors.white),
                             onPressed: () {
-                              // Open email client
+                              _launchURL(Uri.parse("mailto:${member.email}"));
                             },
                           ),
                           IconButton(
                             icon:
-                                Icon(Icons.linked_camera, color: Colors.white),
+                                Icon(Ionicons.logo_github, color: Colors.white),
                             onPressed: () {
-                              // Open LinkedIn profile
+                              _launchURL(Uri.parse(member.gitHub));
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Ionicons.logo_linkedin,
+                                color: Colors.white),
+                            onPressed: () {
+                              _launchURL(Uri.parse(member.linkedIn));
                             },
                           ),
                         ],
@@ -400,13 +435,14 @@ class TeamMember {
   final String email;
   final String linkedIn;
   final String bio;
+  final String gitHub;
 
-  TeamMember({
-    required this.name,
-    required this.role,
-    required this.avatar,
-    required this.email,
-    required this.linkedIn,
-    required this.bio,
-  });
+  TeamMember(
+      {required this.name,
+      required this.role,
+      required this.avatar,
+      required this.email,
+      required this.linkedIn,
+      required this.bio,
+      required this.gitHub});
 }

@@ -78,7 +78,8 @@ class _AccountScreenState extends State<AccountScreen> {
               const Text(
                 "Settings",
                 style: TextStyle(
-                    fontSize: 36,
+                    fontFamily: "kontakt",
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),

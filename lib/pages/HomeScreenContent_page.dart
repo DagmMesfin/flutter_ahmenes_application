@@ -83,21 +83,9 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
     }
   }
 
-  void loadData() {
-    // Simulating data loading process
-    Future.delayed(Duration(seconds: 3), () {
-      setState(() {
-        isLoading = false;
-      });
-    });
-    print('After setState: $isLoading');
-  }
-
   void updateData() {
     setState(() {
       fetchUserData();
-      isLoading = true;
-      loadData();
     });
   }
 
@@ -131,6 +119,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                           Text(
                             'Astronomy',
                             style: TextStyle(
+                              fontFamily: "Kontakt",
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -200,7 +189,10 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                   ),
                                   Text(
                                     "Custom",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "exan",
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -220,7 +212,10 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                   ),
                                   Text(
                                     "Random",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "exan",
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -241,7 +236,10 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                   ),
                                   Text(
                                     "Today",
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: "exan",
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -252,153 +250,175 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  isLoading
-                      ? loadAnim(context)
-                      : FutureBuilder<Apod>(
-                          future: futureApod,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              fileTypo(snapshot.data!.url!);
-                              print(_result);
-                              print(_result ==
-                                  "text/html; charset=utf-8" as String?);
-                              return SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(
-                                  children: [
-                                    Row(
+                  FutureBuilder<Apod>(
+                    future: futureApod,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return loadAnim(context); // Display loading indicator
+                      } else if (snapshot.hasData) {
+                        fileTypo(snapshot.data!.url!);
+                        print(_result);
+                        print(_result == "text/html; charset=utf-8" as String?);
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) {
-                                                    return _result ==
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return _result ==
+                                                      "text/html; charset=utf-8"
+                                                  ? ImageFullScreenWrapperWidget(
+                                                      child: Image(
+                                                      image: NetworkImage(
+                                                        snapshot.data!
+                                                            .thumbnailUrl!,
+                                                      ),
+                                                    ))
+                                                  : ImageFullScreenWrapperWidget(
+                                                      child: Image(
+                                                      image: NetworkImage(
+                                                          snapshot.data!.url!),
+                                                    ));
+                                            }));
+                                          },
+                                          child: Container(
+                                            width: size.width * 0.8,
+                                            height: size.height * 0.4,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                image: DecorationImage(
+                                                    image: _result ==
                                                             "text/html; charset=utf-8"
-                                                        ? ImageFullScreenWrapperWidget(
-                                                            child: Image(
-                                                            image: NetworkImage(
-                                                                snapshot.data!
-                                                                    .thumbnailUrl!),
-                                                          ))
-                                                        : ImageFullScreenWrapperWidget(
-                                                            child: Image(
-                                                            image: NetworkImage(
-                                                                snapshot.data!
-                                                                    .url!),
-                                                          ));
-                                                  }));
-                                                },
-                                                child: Container(
-                                                  width: size.width * 0.8,
-                                                  height: size.height * 0.4,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      image: DecorationImage(
-                                                          image: _result ==
-                                                                  "text/html; charset=utf-8"
-                                                              ? NetworkImage(
-                                                                  snapshot.data!
-                                                                      .thumbnailUrl!)
-                                                              : NetworkImage(
-                                                                  snapshot.data!
-                                                                      .url!),
-                                                          fit: BoxFit.cover)),
-                                                ),
-                                              ),
-                                            ],
+                                                        ? NetworkImage(snapshot
+                                                            .data!
+                                                            .thumbnailUrl!)
+                                                        : NetworkImage(snapshot
+                                                            .data!.url!),
+                                                    fit: BoxFit.cover)),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      width: size.width * 0.8,
-                                      child: Wrap(
-                                        children: [
-                                          Text(
-                                            snapshot.data!.title!,
-                                            softWrap: true,
-                                            style: TextStyle(
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              height: 1,
-                                              letterSpacing: 3.0,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      width: size.width * 0.8,
-                                      child: Wrap(
-                                        children: [
-                                          Text(
-                                            snapshot.data!.date!,
-                                            softWrap: true,
-                                            style: TextStyle(
-                                              fontSize: 21,
-                                              color: Colors.white,
-                                              height: 1,
-                                              letterSpacing: 3.0,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      width: size.width * 0.8,
-                                      child: Wrap(
-                                        children: [
-                                          Text(snapshot.data!.explanation!,
-                                              textAlign: TextAlign.justify,
-                                              softWrap: true,
-                                              style: GoogleFonts.titilliumWeb(
-                                                fontSize: 18,
-                                                color: Colors.white,
-                                                height: 1,
-                                                letterSpacing: 1.0,
-                                              )),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            } else if (snapshot.hasError) {
-                              return Center(
-                                child: Column(
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                width: size.width * 0.8,
+                                child: Wrap(
                                   children: [
-                                    LottieBuilder.asset("assets/anim/ufo.json"),
                                     Text(
-                                      "Oops! Try in a bit!",
+                                      snapshot.data!.title!,
+                                      softWrap: true,
                                       style: TextStyle(
-                                          fontSize: 20, color: Colors.white),
+                                        fontFamily: "Canis Minor",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        height: 1,
+                                        letterSpacing: 3.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                width: size.width * 0.8,
+                                child: Wrap(
+                                  children: [
+                                    Text(
+                                      snapshot.data!.date!,
+                                      softWrap: true,
+                                      style: TextStyle(
+                                        fontFamily: "Exan",
+                                        fontSize: 21,
+                                        color: Colors.white,
+                                        height: 1,
+                                        letterSpacing: 3.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                width: size.width * 0.8,
+                                child: Wrap(
+                                  children: [
+                                    Text(snapshot.data!.explanation!,
+                                        textAlign: TextAlign.left,
+                                        softWrap: true,
+                                        style: GoogleFonts.titilliumWeb(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          height: 1,
+                                          letterSpacing: 1.0,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                width: size.width * 0.8,
+                                child: Wrap(
+                                  children: [
+                                    Text(
+                                      "© ${snapshot.data!.copyright!.replaceAll("\n", "")}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "exan",
+                                          fontSize: 15),
                                     )
                                   ],
                                 ),
-                              );
-                            }
+                              ),
+                            ],
+                          ),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Column(
+                            children: [
+                              LottieBuilder.asset("assets/anim/ufo.json"),
+                              Text(
+                                "Oops! Try in a bit!",
+                                style: TextStyle(
+                                    fontFamily: "canis minor",
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17),
+                              )
+                            ],
+                          ),
+                        );
+                      }
 
-                            return Text("");
-                          },
-                        ),
+                      return Text("");
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
