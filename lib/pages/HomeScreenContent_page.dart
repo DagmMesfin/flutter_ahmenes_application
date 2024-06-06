@@ -165,8 +165,9 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                   ),
                   SizedBox(height: 24),
                   Container(
-                      height: 70,
-                      width: size.width * 0.8,
+                      height: 85,
+                      width: size.width * 0.9,
+                      padding: EdgeInsets.only(top: 5, bottom: 5),
                       decoration: BoxDecoration(
                           color: Color.fromARGB(181, 58, 57, 57),
                           borderRadius: BorderRadius.circular(6)),
@@ -292,7 +293,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                             }));
                                           },
                                           child: Container(
-                                            width: size.width * 0.8,
+                                            width: size.width * 0.9,
                                             height: size.height * 0.4,
                                             decoration: BoxDecoration(
                                                 borderRadius:
@@ -317,7 +318,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                 height: 20,
                               ),
                               Container(
-                                width: size.width * 0.8,
+                                width: size.width * 0.9,
                                 child: Wrap(
                                   children: [
                                     Text(
@@ -336,10 +337,10 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 15,
                               ),
                               Container(
-                                width: size.width * 0.8,
+                                width: size.width * 0.9,
                                 child: Wrap(
                                   children: [
                                     Text(
@@ -347,7 +348,7 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                       softWrap: true,
                                       style: TextStyle(
                                         fontFamily: "Exan",
-                                        fontSize: 21,
+                                        fontSize: 18,
                                         color: Colors.white,
                                         height: 1,
                                         letterSpacing: 3.0,
@@ -357,10 +358,10 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 30,
                               ),
                               Container(
-                                width: size.width * 0.8,
+                                width: size.width * 0.9,
                                 child: Wrap(
                                   children: [
                                     Text(snapshot.data!.explanation!,
@@ -376,14 +377,16 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 30,
                               ),
                               Container(
-                                width: size.width * 0.8,
+                                width: size.width * 0.9,
                                 child: Wrap(
                                   children: [
                                     Text(
-                                      "© ${snapshot.data!.copyright!.replaceAll("\n", "")}",
+                                      snapshot.data!.copyright != null
+                                          ? "© ${snapshot.data!.copyright!.replaceAll("\n", "")}"
+                                          : "© NASA API",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: "exan",

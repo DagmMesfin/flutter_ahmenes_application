@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/global/common/toast.dart';
 import 'dart:ui';
@@ -30,6 +31,7 @@ class AboutPage extends StatelessWidget {
       email: '1babidagi@gmail.com',
       linkedIn: 'https://www.linkedin.com/in/dagmawibabi/',
       gitHub: 'https://github.com/dagmawibabi',
+      telegram: 'https://t.me/DagmawiBabi',
       bio:
           'Dagmawi Esayas, also known as Dagmawi Babi, is a visionary space enthusiast and the esteemed leader of the space club. As the club leader, Dagmawi Babi has fearlessly charted new frontiers and organized numerous intergalactic expeditions, all while fostering a sense of camaraderie among his fellow cadets. His leadership style is characterized by a blend of unwavering determination and infectious enthusiasm, making him an inspiration to all who share his love for the cosmos.',
     ),
@@ -40,6 +42,7 @@ class AboutPage extends StatelessWidget {
       email: 'dagmmesfin99@gmail.com',
       linkedIn: 'https://www.linkedin.com/in/dagimmesfin',
       gitHub: 'https://github.com/DagmMesfin',
+      telegram: 'https://t.me/DageronDeEthiopas',
       bio:
           'Dagim Mesfin, a visionary Flutter mobile developer, soars through the cosmic realms of digital innovation with unmatched creativity and precision. In the ever-expanding universe of app development, he is a celestial navigator, skillfully weaving together the constellations of code and design. His passion for crafting seamless and enchanting user experiences is as boundless as the cosmos, illuminating each project with a touch of the extraordinary.',
     ),
@@ -50,6 +53,7 @@ class AboutPage extends StatelessWidget {
       email: 'aaydagi77@gmail.com',
       linkedIn: 'https://www.linkedin.com/in/dagmawi-ayenew-3889a8296/',
       gitHub: 'https://github.com/Dagiayy',
+      telegram: 'https://t.me/Dagiiay',
       bio:
           'Dagmawi Ayenew is an intrepid mobile developer, navigating the vast digital cosmos with unparalleled skill and ingenuity. With a mind as expansive as the universe, he crafts stellar mobile applications that transcend the ordinary, constantly pushing the boundaries of what’s possible in the mobile realm.',
     ),
@@ -58,6 +62,7 @@ class AboutPage extends StatelessWidget {
       role: 'The UI/UX Designer',
       avatar: 'assets/images/jj.jpg',
       email: 'yohannesgetachewerieso@gmail.com',
+      telegram: 'https://t.me/Yohhannees',
       gitHub: 'https://github.com/yohhannees',
       linkedIn: 'https://www.linkedin.com/in/yohannes-getachew-667a1b241',
       bio:
@@ -112,14 +117,16 @@ class AboutPage extends StatelessWidget {
           ),
           Positioned(
               left: 10,
-              top: 35,
+              top: 40,
               child: IconButton(
-                  style: ButtonStyle(
-                      iconColor: MaterialStatePropertyAll(Colors.white)),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Ionicons.arrow_undo)))
+                style: ButtonStyle(
+                    iconColor: MaterialStatePropertyAll(Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Ionicons.arrow_back),
+                iconSize: 35,
+              ))
         ],
       ),
     );
@@ -156,7 +163,7 @@ class AboutPage extends StatelessWidget {
             'Ahamenes Space Club is dedicated to astronomy and space technology. We engage in educational outreach, public engagement, and collaborate with space agencies. Through events like star-gazing and workshops, we inspire curiosity about the cosmos and build a community of enthusiasts. We participate in citizen science initiatives, partner with advocacy groups, and highlight the practical benefits of space exploration, from technological advancements to environmental monitoring. Join us in our journey of exploration and innovation.',
             style: TextStyle(fontSize: 16, color: Colors.white),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 80),
           Text(
             'Behind the Magic',
             style: TextStyle(
@@ -198,20 +205,11 @@ class AboutPage extends StatelessWidget {
                       children: <Widget>[
                         IconButton(
                           icon: Icon(
-                            Ionicons.mail,
+                            Ionicons.paper_plane,
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            _launchURL(Uri.parse('mailto:${member.email}'));
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Ionicons.logo_linkedin,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            _launchURL(Uri.parse(member.linkedIn));
+                            _launchURL(Uri.parse(member.telegram));
                           },
                         ),
                       ],
@@ -301,8 +299,7 @@ class AboutPage extends StatelessWidget {
             Center(
               child: Container(
                 child: AlertDialog(
-                  backgroundColor:
-                      Color.fromARGB(255, 46, 46, 46).withOpacity(0.7),
+                  backgroundColor: Color.fromARGB(255, 46, 46, 46),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -330,9 +327,39 @@ class AboutPage extends StatelessWidget {
                             fontStyle: FontStyle.italic),
                       ),
                       SizedBox(height: 10),
-                      Text(
-                        member.bio,
-                        style: TextStyle(color: Colors.white),
+                      AnimatedTextKit(
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            "Processing info...",
+                            textStyle: const TextStyle(
+                              fontFamily: "exan",
+                              color: Colors.white,
+                              fontSize: 14.0,
+                            ),
+                            speed: const Duration(milliseconds: 50),
+                          ),
+                          TypewriterAnimatedText(
+                            "Info fetched successfully!",
+                            textStyle: const TextStyle(
+                              fontFamily: "exan",
+                              color: Colors.white,
+                              fontSize: 14.0,
+                            ),
+                            speed: const Duration(milliseconds: 50),
+                          ),
+                          TypewriterAnimatedText(
+                            member.bio,
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14.0,
+                            ),
+                            speed: const Duration(milliseconds: 10),
+                          ),
+                        ],
+                        totalRepeatCount: 1,
+                        pause: const Duration(milliseconds: 500),
+                        displayFullTextOnTap: true,
+                        stopPauseOnTap: true,
                       ),
                       SizedBox(height: 10),
                       Row(
@@ -436,6 +463,7 @@ class TeamMember {
   final String linkedIn;
   final String bio;
   final String gitHub;
+  final String telegram;
 
   TeamMember(
       {required this.name,
@@ -444,5 +472,6 @@ class TeamMember {
       required this.email,
       required this.linkedIn,
       required this.bio,
+      required this.telegram,
       required this.gitHub});
 }
