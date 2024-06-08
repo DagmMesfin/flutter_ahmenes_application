@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/fucntions/current_date.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_ahmenes_application/widgets/loading_animation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:ionicons/ionicons.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeScreenContentPage extends StatefulWidget {
@@ -163,9 +165,9 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                       )
                     ],
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 20),
                   Container(
-                      height: 85,
+                      height: 80,
                       width: size.width * 0.9,
                       padding: EdgeInsets.only(top: 5, bottom: 5),
                       decoration: BoxDecoration(
@@ -179,13 +181,13 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                               Column(
                                 children: [
                                   IconButton(
-                                    icon: ImageIcon(
-                                      AssetImage(
-                                          'assets/icons/calendar_clock.png'),
+                                    icon: Icon(
+                                      Ionicons.calendar_number_outline,
                                       color: const Color.fromARGB(
                                           255, 255, 255, 255),
                                       size: 30,
                                     ),
+                                    padding: EdgeInsets.all(0),
                                     onPressed: () => _selectDate(context),
                                   ),
                                   Text(
@@ -200,12 +202,13 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                               Column(
                                 children: [
                                   IconButton(
-                                    icon: ImageIcon(
-                                      AssetImage('assets/icons/calendar.png'),
+                                    icon: Icon(
+                                      Ionicons.dice_outline,
                                       color: const Color.fromARGB(
                                           255, 255, 255, 255),
                                       size: 30,
                                     ),
+                                    padding: EdgeInsets.all(0),
                                     onPressed: () => setState(() {
                                       updateData();
                                       futureApod = fetchApod(getRandomDate());
@@ -223,12 +226,13 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                               Column(
                                 children: [
                                   IconButton(
-                                    icon: ImageIcon(
-                                      AssetImage('assets/icons/early_on.png'),
+                                    icon: Icon(
+                                      Ionicons.sunny,
                                       color: const Color.fromARGB(
                                           255, 255, 255, 255),
                                       size: 30,
                                     ),
+                                    padding: EdgeInsets.all(0),
                                     onPressed: () => setState(() {
                                       updateData();
                                       print(currentDate());
@@ -364,15 +368,46 @@ class _HomeScreenContentPageState extends State<HomeScreenContentPage> {
                                 width: size.width * 0.9,
                                 child: Wrap(
                                   children: [
-                                    Text(snapshot.data!.explanation!,
-                                        textAlign: TextAlign.left,
-                                        softWrap: true,
-                                        style: GoogleFonts.titilliumWeb(
-                                          fontSize: 18,
-                                          color: Colors.white,
-                                          height: 1,
-                                          letterSpacing: 1.0,
-                                        )),
+                                    AnimatedTextKit(
+                                      animatedTexts: [
+                                        TypewriterAnimatedText(
+                                          "Fetching from universe...",
+                                          textStyle: const TextStyle(
+                                            fontFamily: "exan",
+                                            color: Colors.white,
+                                            fontSize: 15.0,
+                                          ),
+                                          speed:
+                                              const Duration(milliseconds: 50),
+                                        ),
+                                        TypewriterAnimatedText(
+                                          "Info fetched successfully!",
+                                          textStyle: const TextStyle(
+                                            fontFamily: "exan",
+                                            color: Colors.white,
+                                            fontSize: 15.0,
+                                          ),
+                                          speed:
+                                              const Duration(milliseconds: 50),
+                                        ),
+                                        TypewriterAnimatedText(
+                                          snapshot.data!.explanation!,
+                                          textAlign: TextAlign.left,
+                                          textStyle: GoogleFonts.titilliumWeb(
+                                            fontSize: 17,
+                                            color: Colors.white,
+                                            height: 1.3,
+                                            letterSpacing: 1.1,
+                                          ),
+                                          speed:
+                                              const Duration(milliseconds: 5),
+                                        ),
+                                      ],
+                                      totalRepeatCount: 1,
+                                      pause: const Duration(milliseconds: 500),
+                                      displayFullTextOnTap: true,
+                                      stopPauseOnTap: true,
+                                    ),
                                   ],
                                 ),
                               ),

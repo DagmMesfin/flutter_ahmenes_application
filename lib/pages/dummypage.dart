@@ -65,15 +65,17 @@ class _DummyPageState extends State<DummyPage>
             ),
           ),
           Positioned(
-              left: 10,
-              top: 35,
+              left: 15,
+              top: 40,
               child: IconButton(
-                  style: ButtonStyle(
-                      iconColor: MaterialStatePropertyAll(Colors.white)),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(Ionicons.arrow_undo)))
+                style: ButtonStyle(
+                    iconColor: MaterialStatePropertyAll(Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Ionicons.arrow_back),
+                iconSize: 40,
+              ))
         ],
       ),
     );

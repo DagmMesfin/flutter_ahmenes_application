@@ -9,3 +9,8 @@ Future<bool> getLoginState() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getBool('isLoggedIn') ?? false;
 }
+
+void _saveNotificationPreference(bool enabled) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setBool('notificationsEnabled', enabled);
+}

@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ahmenes_application/global/common/toast.dart';
+import 'package:flutter_ahmenes_application/widgets/fullscreen_show.dart';
 import 'dart:ui';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -163,7 +164,7 @@ class AboutPage extends StatelessWidget {
             'Ahamenes Space Club is dedicated to astronomy and space technology. We engage in educational outreach, public engagement, and collaborate with space agencies. Through events like star-gazing and workshops, we inspire curiosity about the cosmos and build a community of enthusiasts. We participate in citizen science initiatives, partner with advocacy groups, and highlight the practical benefits of space exploration, from technological advancements to environmental monitoring. Join us in our journey of exploration and innovation.',
             style: TextStyle(fontSize: 16, color: Colors.white),
           ),
-          SizedBox(height: 80),
+          SizedBox(height: 60),
           Text(
             'Behind the Magic',
             style: TextStyle(
@@ -200,19 +201,14 @@ class AboutPage extends StatelessWidget {
                             color: Colors.white,
                             fontStyle: FontStyle.italic,
                             fontSize: 14)),
-                    trailing: Wrap(
-                      spacing: 12, // space between two icons
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Ionicons.paper_plane,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            _launchURL(Uri.parse(member.telegram));
-                          },
-                        ),
-                      ],
+                    trailing: IconButton(
+                      icon: Icon(
+                        Ionicons.paper_plane,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        _launchURL(Uri.parse(member.telegram));
+                      },
                     ),
                   ),
                 ),
@@ -264,6 +260,9 @@ class AboutPage extends StatelessWidget {
                       Uri.parse('https://space-website-amber.vercel.app/'));
                 },
               ),
+              SizedBox(
+                width: 20,
+              ),
               IconButton(
                 icon: Icon(
                   Ionicons.logo_linkedin,
@@ -273,6 +272,9 @@ class AboutPage extends StatelessWidget {
                   _launchURL(Uri.parse(
                       'https://www.linkedin.com/company/ahamenes-space-technology-institute'));
                 },
+              ),
+              SizedBox(
+                width: 20,
               ),
               IconButton(
                 icon: Icon(
@@ -313,9 +315,18 @@ class AboutPage extends StatelessWidget {
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage(member.avatar),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ImageFullScreenWrapperWidget(
+                                child: Image(image: AssetImage(member.avatar)));
+                          }));
+                        },
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: AssetImage(member.avatar),
+                        ),
                       ),
                       SizedBox(height: 10),
                       Text(
@@ -361,7 +372,7 @@ class AboutPage extends StatelessWidget {
                         displayFullTextOnTap: true,
                         stopPauseOnTap: true,
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 25),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -402,19 +413,13 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             // Top left Lottie animation
-            Positioned(
-              top: 30,
-              right: 40,
-              child: Lottie.asset('assets/anim/top-right.json',
-                  width: 100, height: 100),
-            ),
-            // Bottom right Lottie animation
-            Positioned(
-              bottom: 30,
-              left: 40,
-              child: Lottie.asset('assets/anim/bottom-left.json',
-                  width: 100, height: 100),
-            ),
+            // Positioned(
+            //   top: 30,
+            //   right: 40,
+            //   child: Lottie.asset('assets/anim/bottom-left.json',
+            //       width: 100, height: 100),
+            // ),
+            // // Bottom right Lottie animation
           ],
         );
       },

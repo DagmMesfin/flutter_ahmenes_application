@@ -731,9 +731,10 @@ class _userloginState extends State<userlogin> {
       } else {
         showToast(message: 'Login Successfully');
         await saveLoginState(true);
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => HomeScreen()),
+          (Route<dynamic> route) => false,
         );
       }
     } else {

@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ahmenes_application/features/notification/notification_service.dart';
 import 'package:flutter_ahmenes_application/features/user_auth/firbase_auth_implementation/firebase_auth_services.dart';
+import 'package:flutter_ahmenes_application/global/common/toast.dart';
 import 'package:flutter_ahmenes_application/models/user_model.dart';
 import 'package:flutter_ahmenes_application/pages/profile/screens/edit_screen.dart';
 import 'package:flutter_ahmenes_application/pages/profile/screens/about_us.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_ahmenes_application/pages/profile/widgets/setting_item.d
 import 'package:flutter_ahmenes_application/pages/profile/widgets/setting_switch.dart';
 
 import 'package:ionicons/ionicons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -20,7 +23,31 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  bool isDarkMode = false;
+  bool notific = false;
+  bool notificationsEnabled = true;
+
+  void _toggleNotifications() async {
+    setState(() {
+      notificationsEnabled = !notificationsEnabled;
+    });
+    await NotificationService().toggleNotifications(notificationsEnabled);
+    _saveNotificationPreference(notificationsEnabled);
+  }
+
+  void _loadNotificationPreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? enabled = prefs.getBool('notificationsEnabled');
+    setState(() {
+      notificationsEnabled = enabled ?? true;
+    });
+    await NotificationService().toggleNotifications(notificationsEnabled);
+  }
+
+  void _saveNotificationPreference(bool enabled) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('notificationsEnabled', enabled);
+  }
+
   UserModel user = UserModel.empty();
   var store = FirebaseFirestore.instance;
   var isLoading = false;
@@ -58,6 +85,7 @@ class _AccountScreenState extends State<AccountScreen> {
   void initState() {
     // TODO: implement initState
     updateData();
+    _loadNotificationPreference();
     super.initState();
   }
 
@@ -151,11 +179,16 @@ class _AccountScreenState extends State<AccountScreen> {
                 icon: Ionicons.notifications,
                 bgColor: Colors.blue.shade100,
                 iconColor: Colors.blue,
-                value: isDarkMode,
+                value: notificationsEnabled,
                 onTap: (value) {
-                  setState(() {
-                    isDarkMode = value;
-                  });
+                  _toggleNotifications();
+                  if (notificationsEnabled) {
+                    showToast(
+                        message: "Daily Notification Enabled Successfully");
+                  } else {
+                    showToast(
+                        message: "Daily Notification Disabled Successfully");
+                  }
                 },
               ),
               const SizedBox(height: 20),
