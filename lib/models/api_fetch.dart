@@ -3,12 +3,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_ahmenes_application/global/common/toast.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 Future<Apod> fetchApod(date) async {
+  String APIKey = dotenv.get('NASA_API_KEY');
   try {
     final response = await http.get(Uri.parse(
-        'https://api.nasa.gov/planetary/apod?api_key=8AdpOEvuLkF4fGJBno12wSm4H8Lzo4c0XApTHDeW&thumbs=true&date=$date'));
+        'https://api.nasa.gov/planetary/apod?api_key=$APIKey&thumbs=true&date=$date'));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
